@@ -38,7 +38,7 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
-    autoescape: name
+    autoescape: 'name'
 
 # Doctrine Configuration
 doctrine:

@@ -1,5 +1,6 @@
 {
     "name": "SymfonyToDo",
+    "description": "Symfony ToDo project for training best practises",
     "license": "proprietary",
     "type": "project",
     "autoload": {

@@ -27,5 +27,6 @@ class SecurityController extends Controller
 	public function loginCheckAction()
 	{
 		// will never be executed
+		return $this->redirectToRoute('security_login');
 	}
 }

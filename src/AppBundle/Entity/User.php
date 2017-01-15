@@ -48,7 +48,6 @@ class User implements UserInterface
 	 * @return string The password
 	 */
 	public function getPassword() {
-		// TODO: Implement getPassword() method.
 	}
 
 	/**
@@ -59,7 +58,6 @@ class User implements UserInterface
 	 * @return string|null The salt
 	 */
 	public function getSalt() {
-		// TODO: Implement getSalt() method.
 	}
 
 	/**
@@ -78,6 +76,5 @@ class User implements UserInterface
 	 * the plain-text password is stored on this object.
 	 */
 	public function eraseCredentials() {
-		// TODO: Implement eraseCredentials() method.
 	}
 }

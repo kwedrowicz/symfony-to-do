@@ -1,0 +1,3 @@
+rules:
+    twig.disabled_escaper:
+            enabled: false

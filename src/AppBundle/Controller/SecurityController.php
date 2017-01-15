@@ -22,7 +22,7 @@ class SecurityController extends Controller
 		return $this->render('security/login.html.twig');
 	}
 	/**
-	 * @Route("/login_check", name="login_check", methods={"POST"})
+	 * @Route("/login_check", name="login_check", methods={"GET","POST"})
 	 */
 	public function loginCheckAction()
 	{

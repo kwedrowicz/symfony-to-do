@@ -15,14 +15,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class SecurityController extends Controller
 {
 	/**
-	 * @Route("/login", name="security_login")
+	 * @Route("/login", name="security_login", methods={"GET"})
 	 */
 	public function loginAction()
 	{
 		return $this->render('security/login.html.twig');
 	}
 	/**
-	 * @Route("/login_check", name="login_check")
+	 * @Route("/login_check", name="login_check", methods={"POST"})
 	 */
 	public function loginCheckAction()
 	{

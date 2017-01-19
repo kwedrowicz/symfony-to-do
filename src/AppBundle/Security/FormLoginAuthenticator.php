@@ -29,8 +29,7 @@ class FormLoginAuthenticator extends AbstractGuardAuthenticator
 		$this->router = $router;
 	}
 
-	public function getCredentials(Request $request)
-	{
+	public function getCredentials(Request $request) {
 		if ($request->getPathInfo() != '/login_check') {
 			return;
 		}
@@ -39,38 +38,37 @@ class FormLoginAuthenticator extends AbstractGuardAuthenticator
 			'password' => $request->request->get('_password'),
 		];
 	}
-	public function getUser($credentials, UserProviderInterface $userProvider)
-	{
+
+	public function getUser($credentials, UserProviderInterface $userProvider) {
 		$username = $credentials['username'];
-		$user = new User($username);
-		return $user;
+		return $userProvider->loadUserByUsername($username);
 	}
-	public function checkCredentials($credentials, UserInterface $user)
-	{
+
+	public function checkCredentials($credentials, UserInterface $user) {
 		$password = $credentials['password'];
 		if ($password == 'santa' || $password == 'elves') {
 			return;
 		}
-		return true;
+		return false;
 	}
+
 	public function onAuthenticationFailure(Request $request,
-		AuthenticationException $exception)
-	{
+		AuthenticationException $exception) {
 		$url = $this->router->generate('security_login');
 		return new RedirectResponse($url);
 	}
+
 	public function onAuthenticationSuccess(Request $request,
-		TokenInterface $token, $providerKey)
-	{
+		TokenInterface $token, $providerKey) {
 		$url = $this->router->generate('homepage');
 		return new RedirectResponse($url);
 	}
-	public function start(Request $request, AuthenticationException $e = null)
-	{
+
+	public function start(Request $request, AuthenticationException $e = null) {
 		$url = $this->router->generate('security_login');
 		return new RedirectResponse($url);
 	}
-	public function supportsRememberMe()
-	{
+
+	public function supportsRememberMe() {
 	}
 }

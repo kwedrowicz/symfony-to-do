@@ -15,7 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="user")
  */
-class User implements UserInterface, \Serializable
+class User implements UserInterface
 {
 	/**
 	 * @ORM\Column(type="integer")
@@ -25,19 +25,14 @@ class User implements UserInterface, \Serializable
 	private $id;
 
 	/**
-	 * @ORM\Column(type="string", length=25, unique=true)
+	 * @ORM\Column(type="string", length=100)
 	 */
 	private $username;
 
-	/**
-	 * @ORM\Column(type="string", length=64)
-	 */
-	private $password;
-
-	/**
-	 * @ORM\Column(type="string", length=60, unique=true)
-	 */
-	private $email;
+	public function __construct($username)
+	{
+		$this->username = $username;
+	}
 
 	/**
 	 * Returns the roles granted to the user.
@@ -68,7 +63,6 @@ class User implements UserInterface, \Serializable
 	 * @return string The password
 	 */
 	public function getPassword() {
-		return $this->password;
 	}
 
 	/**
@@ -79,7 +73,6 @@ class User implements UserInterface, \Serializable
 	 * @return string|null The salt
 	 */
 	public function getSalt() {
-		return null;
 	}
 
 	/**
@@ -98,49 +91,5 @@ class User implements UserInterface, \Serializable
 	 * the plain-text password is stored on this object.
 	 */
 	public function eraseCredentials() {
-	}
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set username
-     *
-     * @param string $username
-     *
-     * @return User
-     */
-    public function setUsername($username)
-    {
-        $this->username = $username;
-
-        return $this;
-    }
-
-	/** @see \Serializable::serialize() */
-	public function serialize()
-	{
-		return serialize(array(
-			$this->id,
-			$this->username,
-			$this->password,
-		));
-	}
-
-	/** @see \Serializable::unserialize() */
-	public function unserialize($serialized)
-	{
-		list (
-			$this->id,
-			$this->username,
-			$this->password
-			) = unserialize($serialized);
 	}
 }

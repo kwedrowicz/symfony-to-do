@@ -9,16 +9,25 @@
 namespace AppBundle\Security;
 
 
-use AppBundle\Entity\User;
+use AppBundle\Repository\UserRepository;
+use Doctrine\ORM\EntityManager;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 class UserProvider implements UserProviderInterface {
 
+	/**
+	 * @var EntityManager
+	 */
+	private $em;
+
+	public function __construct(EntityManager $em) {
+		$this->em = $em;
+
+	}
+
 	public function loadUserByUsername( $username ) {
-		// "load" the user - e.g. load from the db
-		$user = new User($username);
-		return $user;
+		return $this->em->getRepository('AppBundle:User')->loadUserByUsername($username);
 	}
 
 	public function refreshUser( UserInterface $user ) {

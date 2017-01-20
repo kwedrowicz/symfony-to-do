@@ -9,10 +9,14 @@
 namespace AppBundle\Entity;
 
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
+ * @UniqueEntity(fields="email", message="Email already taken")
+ * @UniqueEntity(fields="username", message="Username already taken")
  * @ORM\Table(name="user")
  */
 class User implements UserInterface, \Serializable
@@ -26,6 +30,7 @@ class User implements UserInterface, \Serializable
 
 	/**
 	 * @ORM\Column(type="string", length=25, unique=true)
+	 * @Assert\NotBlank()
 	 */
 	private $username;
 
@@ -36,8 +41,16 @@ class User implements UserInterface, \Serializable
 
 	/**
 	 * @ORM\Column(type="string", length=60, unique=true)
+	 * @Assert\NotBlank()
+	 * @Assert\Email()
 	 */
 	private $email;
+
+	/**
+	 * @Assert\NotBlank()
+	 * @Assert\Length(max=4096)
+	 */
+	private $plainPassword;
 
 	/**
 	 * Returns the roles granted to the user.
@@ -142,5 +155,53 @@ class User implements UserInterface, \Serializable
 			$this->username,
 			$this->password
 			) = unserialize($serialized);
+	}
+
+    /**
+     * Set password
+     *
+     * @param string $password
+     *
+     * @return User
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     *
+     * @return User
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+	public function getPlainPassword()
+	{
+		return $this->plainPassword;
+	}
+
+	public function setPlainPassword($password)
+	{
+		$this->plainPassword = $password;
 	}
 }

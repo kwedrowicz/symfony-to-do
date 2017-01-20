@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
@@ -25,8 +26,14 @@ class FormLoginAuthenticator extends AbstractGuardAuthenticator
 	 */
 	private $router;
 
-	public function __construct(RouterInterface $router) {
+	/**
+	 * @var UserPasswordEncoderInterface
+	 */
+	private $encoder;
+
+	public function __construct(RouterInterface $router, UserPasswordEncoderInterface $encoder) {
 		$this->router = $router;
+		$this->encoder = $encoder;
 	}
 
 	public function getCredentials(Request $request) {
@@ -46,10 +53,7 @@ class FormLoginAuthenticator extends AbstractGuardAuthenticator
 
 	public function checkCredentials($credentials, UserInterface $user) {
 		$password = $credentials['password'];
-		if ($password == 'santa' || $password == 'elves') {
-			return;
-		}
-		return false;
+		return $this->encoder->isPasswordValid($user, $password);
 	}
 
 	public function onAuthenticationFailure(Request $request,

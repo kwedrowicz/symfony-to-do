@@ -1,0 +1,29 @@
+{
+  "name": "symfony-to-do",
+  "version": "1.0.0",
+  "description": "Symfony TODO =========",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/starspire/symfony-to-do.git"
+  },
+  "author": "Krzysztof Wędrowicz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/starspire/symfony-to-do/issues"
+  },
+  "homepage": "https://github.com/starspire/symfony-to-do#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^2.3.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^2.0.0"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "symfony-to-do",
+  "homepage": "https://github.com/starspire/symfony-to-do",
+  "authors": [
+    "Krzysztof Wędrowicz <krzysztof.wedrowicz@wp.pl>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}

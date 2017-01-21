@@ -36,6 +36,7 @@ class TaskController extends Controller
     public function newAction(Request $request)
     {
         $task = new Task();
+        $task->setUser($this->getUser());
         $form = $this->createForm('AppBundle\Form\Type\TaskType', $task);
         $form->handleRequest($request);
 

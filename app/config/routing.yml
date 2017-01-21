@@ -3,3 +3,6 @@ app:
     type:     annotation
 logout:
    path: /logout
+homepage:
+   path: /
+   defaults: { _controller: AppBundle:Task:index }

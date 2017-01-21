@@ -8,6 +8,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -51,6 +52,21 @@ class User implements UserInterface, \Serializable
 	 * @Assert\Length(max=4096)
 	 */
 	private $plainPassword;
+
+	/**
+	 * @var ArrayCollection|Task[]
+	 *
+	 * @ORM\OneToMany(targetEntity="AppBundle\Entity\Task", mappedBy="user")
+	 */
+	private $tasks;
+
+	public function __construct() {
+		$this->tasks = new ArrayCollection();
+	}
+
+	public function __toString() {
+		return $this->getUsername();
+	}
 
 	/**
 	 * Returns the roles granted to the user.
@@ -204,4 +220,38 @@ class User implements UserInterface, \Serializable
 	{
 		$this->plainPassword = $password;
 	}
+
+    /**
+     * Add task
+     *
+     * @param \AppBundle\Entity\Task $task
+     *
+     * @return User
+     */
+    public function addTask(\AppBundle\Entity\Task $task)
+    {
+        $this->tasks[] = $task;
+
+        return $this;
+    }
+
+    /**
+     * Remove task
+     *
+     * @param \AppBundle\Entity\Task $task
+     */
+    public function removeTask(\AppBundle\Entity\Task $task)
+    {
+        $this->tasks->removeElement($task);
+    }
+
+    /**
+     * Get tasks
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTasks()
+    {
+        return $this->tasks;
+    }
 }

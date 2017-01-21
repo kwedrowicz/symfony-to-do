@@ -6,3 +6,4 @@ logout:
 homepage:
    path: /
    defaults: { _controller: AppBundle:Task:index }
+   methods: GET

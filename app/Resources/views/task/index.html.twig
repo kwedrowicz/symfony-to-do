@@ -21,8 +21,6 @@
                     <div class="btn-group" role="group" aria-label="...">
                         <a href="{{ path('task_show', { 'id': task.id }) }}" class="btn btn-default">show</a>
                         <a href="{{ path('task_edit', { 'id': task.id }) }}"  class="btn btn-default">edit</a>
-                        {% set undone = task.done ? 0 : 1 %}
-                        <a href="{{ path('task_mark_as_done', {'id': task.id, 'done': undone}) }}" class="btn btn-default">{{ undone ? 'done' : 'undone' }}</a>
                     </div>
                 </td>
             </tr>

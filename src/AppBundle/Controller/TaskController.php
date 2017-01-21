@@ -5,7 +5,8 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Task;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Task controller.
@@ -27,12 +28,15 @@ class TaskController extends Controller
         ));
     }
 
-    /**
-     * Creates a new task entity.
-     *
-     * @Route("/new", name="task_new")
-     * @Method({"GET", "POST"})
-     */
+	/**
+	 * Creates a new task entity.
+	 *
+	 * @Route("/new", name="task_new")
+	 * @Method({"GET", "POST"})
+	 * @param Request $request
+	 *
+	 * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+	 */
     public function newAction(Request $request)
     {
         $task = new Task();
@@ -43,7 +47,7 @@ class TaskController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($task);
-            $em->flush($task);
+            $em->flush();
 
             return $this->redirectToRoute('task_show', array('id' => $task->getId()));
         }
@@ -54,32 +58,40 @@ class TaskController extends Controller
         ));
     }
 
-    /**
-     * Finds and displays a task entity.
-     *
-     * @Route("/{id}", name="task_show")
-     * @Method("GET")
-     */
+	/**
+	 * Finds and displays a task entity.
+	 *
+	 * @Route("/{id}", name="task_show")
+	 * @Method("GET")
+	 * @param Task $task
+	 *
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 */
     public function showAction(Task $task)
     {
         $deleteForm = $this->createDeleteForm($task);
 
         return $this->render('task/show.html.twig', array(
             'task' => $task,
-            'delete_form' => $deleteForm->createView(),
+            'delete_form' => $deleteForm->createView()
         ));
     }
 
-    /**
-     * Displays a form to edit an existing task entity.
-     *
-     * @Route("/{id}/edit", name="task_edit")
-     * @Method({"GET", "POST"})
-     */
+	/**
+	 * Displays a form to edit an existing task entity.
+	 *
+	 * @Route("/{id}/edit", name="task_edit")
+	 * @Method({"GET", "POST"})
+	 * @param Request $request
+	 * @param Task $task
+	 *
+	 * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+	 */
     public function editAction(Request $request, Task $task)
     {
         $deleteForm = $this->createDeleteForm($task);
         $editForm = $this->createForm('AppBundle\Form\Type\TaskType', $task);
+        $editForm->add('done');
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -91,16 +103,20 @@ class TaskController extends Controller
         return $this->render('task/edit.html.twig', array(
             'task' => $task,
             'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+            'delete_form' => $deleteForm->createView()
         ));
     }
 
-    /**
-     * Deletes a task entity.
-     *
-     * @Route("/{id}", name="task_delete")
-     * @Method("DELETE")
-     */
+	/**
+	 * Deletes a task entity.
+	 *
+	 * @Route("/{id}", name="task_delete")
+	 * @Method("DELETE")
+	 * @param Request $request
+	 * @param Task $task
+	 *
+	 * @return \Symfony\Component\HttpFoundation\RedirectResponse
+	 */
     public function deleteAction(Request $request, Task $task)
     {
         $form = $this->createDeleteForm($task);
@@ -109,33 +125,10 @@ class TaskController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($task);
-            $em->flush($task);
+            $em->flush();
         }
 
         return $this->redirectToRoute('task_index');
-    }
-
-	/**
-	 * @Route(
-	 *     "/{id}/mark/{done}",
-	 *     name="task_mark_as_done",
-	 *     requirements={
-	 *          "done": "0|1"
-     *     }
-	 * )
-	 * @Method("GET")
-	 *
-	 * @param Task $task
-	 * @param $done
-	 *
-	 * @return \Symfony\Component\HttpFoundation\RedirectResponse
-	 */
-    public function markAsDoneAction(Task $task, $done){
-	    $task->setDone($done);
-	    $em = $this->get('doctrine.orm.entity_manager');
-	    $em->persist($task);
-	    $em->flush();
-	    return $this->redirectToRoute('task_index');
     }
 
     /**

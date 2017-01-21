@@ -115,6 +115,29 @@ class TaskController extends Controller
         return $this->redirectToRoute('task_index');
     }
 
+	/**
+	 * @Route(
+	 *     "/{id}/mark/{done}",
+	 *     name="task_mark_as_done",
+	 *     requirements={
+	 *          "done": "0|1"
+     *     }
+	 * )
+	 * @Method("GET")
+	 *
+	 * @param Task $task
+	 * @param $done
+	 *
+	 * @return \Symfony\Component\HttpFoundation\RedirectResponse
+	 */
+    public function markAsDoneAction(Task $task, $done){
+	    $task->setDone($done);
+	    $em = $this->get('doctrine.orm.entity_manager');
+	    $em->persist($task);
+	    $em->flush();
+	    return $this->redirectToRoute('task_index');
+    }
+
     /**
      * Creates a form to delete a task entity.
      *

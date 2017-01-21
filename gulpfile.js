@@ -19,8 +19,8 @@ gulp.task('css', function(){
 });
 
 var assets = [
-    "bower_components/bootstrap/dist/js/bootstrap.min.js",
-    "bower_components/jquery/dist/jquery.min.js"
+    "bower_components/jquery/dist/jquery.min.js",
+    "bower_components/bootstrap/dist/js/bootstrap.min.js"
 ];
 
 gulp.task('js', function () {

@@ -18,23 +18,17 @@
                 <td>{{ task.subject }}</td>
                 <td>{% if task.done %}Yes{% else %}No{% endif %}</td>
                 <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('task_show', { 'id': task.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('task_edit', { 'id': task.id }) }}">edit</a>
-                        </li>
-                    </ul>
+                    <div class="btn-group" role="group" aria-label="...">
+                        <a href="{{ path('task_show', { 'id': task.id }) }}" class="btn btn-default">show</a>
+                        <a href="{{ path('task_edit', { 'id': task.id }) }}"  class="btn btn-default">edit</a>
+                        {% set undone = task.done ? 0 : 1 %}
+                        <a href="{{ path('task_mark_as_done', {'id': task.id, 'done': undone}) }}" class="btn btn-default">{{ undone ? 'done' : 'undone' }}</a>
+                    </div>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('task_new') }}">Create a new task</a>
-        </li>
-    </ul>
+    <a href="{{ path('task_new') }}" class="btn btn-default btn-lg">Create a new task</a>
 {% endblock %}

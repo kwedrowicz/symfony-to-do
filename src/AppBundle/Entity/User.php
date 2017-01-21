@@ -159,7 +159,7 @@ class User implements UserInterface, \Serializable
 		return serialize(array(
 			$this->id,
 			$this->username,
-			$this->password,
+			$this->password
 		));
 	}
 

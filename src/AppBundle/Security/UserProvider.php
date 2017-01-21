@@ -30,7 +30,8 @@ class UserProvider implements UserProviderInterface {
 	}
 
 	public function refreshUser( UserInterface $user ) {
-		return $user;
+		//return $user;
+		return $this->em->getRepository('AppBundle:User')->loadUserByUsername($user->getUsername());
 	}
 
 	public function supportsClass( $class ) {

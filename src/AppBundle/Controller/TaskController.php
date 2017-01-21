@@ -22,12 +22,8 @@ class TaskController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $tasks = $em->getRepository('AppBundle:Task')->findAll();
-
         return $this->render('task/index.html.twig', array(
-            'tasks' => $tasks,
+            'tasks' => $this->getUser()->getTasks(),
         ));
     }
 
@@ -40,6 +36,7 @@ class TaskController extends Controller
     public function newAction(Request $request)
     {
         $task = new Task();
+        //$task->setUser($this->getUser());
         $form = $this->createForm('AppBundle\Form\TaskType', $task);
         $form->handleRequest($request);
 

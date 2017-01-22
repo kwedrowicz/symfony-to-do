@@ -57,6 +57,7 @@ class User implements UserInterface, \Serializable
 	 * @var ArrayCollection|Task[]
 	 *
 	 * @ORM\OneToMany(targetEntity="AppBundle\Entity\Task", mappedBy="user")
+	 * @ORM\OrderBy({"priority"="DESC"})
 	 */
 	private $tasks;
 

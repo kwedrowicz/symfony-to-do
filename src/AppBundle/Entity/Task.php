@@ -12,6 +12,10 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Task
 {
+	const PRIORITY_NONE = 'none';
+	const PRIORITY_URGENT = 'urgent';
+	const PRIORITY_DEADLINE = 'deadline';
+
     /**
      * @var int
      *
@@ -42,6 +46,13 @@ class Task
 	 * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
 	 */
     private $user;
+
+	/**
+	 * @var int
+	 *
+	 * @ORM\Column(name="priority", type="integer")
+	 */
+	private $priority = 0;
 
 
     /**
@@ -124,5 +135,43 @@ class Task
     public function getUser()
     {
         return $this->user;
+    }
+
+    public static function getAvailablePriorities(){
+    	return [
+    	    self::PRIORITY_NONE => 0,
+		    self::PRIORITY_URGENT => 1,
+		    self::PRIORITY_DEADLINE => 2
+	    ];
+    }
+
+    /**
+     * Set priority
+     *
+     * @param int $priority
+     *
+     * @return Task
+     */
+    public function setPriority($priority)
+    {
+        $this->priority = $priority;
+
+        return $this;
+    }
+
+    public function setPriorityByName($priority){
+	    $this->priority = self::getAvailablePriorities()[$priority];
+
+	    return $this;
+    }
+
+    /**
+     * Get priority
+     *
+     * @return string
+     */
+    public function getPriority()
+    {
+        return array_search($this->priority, self::getAvailablePriorities());
     }
 }

@@ -7,6 +7,7 @@
             <tr>
                 <th>Id</th>
                 <th>Subject</th>
+                <td>Priority</td>
                 <th>Done</th>
                 <th>Actions</th>
             </tr>
@@ -16,6 +17,7 @@
             <tr>
                 <td><a href="{{ path('task_show', { 'id': task.id }) }}">{{ task.id }}</a></td>
                 <td>{{ task.subject }}</td>
+                <td>{{ task.priority }}</td>
                 <td>{% if task.done %}Yes{% else %}No{% endif %}</td>
                 <td>
                     <div class="btn-group" role="group" aria-label="...">

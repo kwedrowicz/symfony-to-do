@@ -6,5 +6,9 @@ php:
 install:
   - composer install
 
+before_script:
+  - bin/console do:da:cr -e=test > /dev/null
+  - bin/console do:sc:cr -e=test > /dev/null
+
 script:
   - vendor/bin/behat

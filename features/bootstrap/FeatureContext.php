@@ -22,9 +22,20 @@ class FeatureContext extends MinkContext
 		$user->setUsername($username);
 		$user->setPlainPassword($password);
 		$user->setEmail("$username.@gmail.com");
-		$em = $this->getContainer()->get('doctrine')->getManager();
-		$em->persist($user);
-		$em->flush();
+		$this->getEntityManager()->persist($user);
+		$this->getEntityManager()->flush();
+	}
+
+	/**
+	 * @Given I am logged in as a user
+	 */
+	public function iAmLoggedInAsAUser()
+	{
+		$this->thereIsAUserWithPassword('user', 'password');
+		$this->visitPath('/login');
+		$this->getPage()->fillField('Username', 'user');
+		$this->getPage()->fillField('Password', 'password');
+		$this->getPage()->pressButton('Login');
 	}
 
 	/**
@@ -34,6 +45,21 @@ class FeatureContext extends MinkContext
 	{
 		$purger = new ORMPurger($this->getContainer()->get('doctrine')->getManager());
 		$purger->purge();
+	}
+
+	/**
+	 * @return \Behat\Mink\Element\DocumentElement
+	 */
+	private function getPage()
+	{
+		return $this->getSession()->getPage();
+	}
+	/**
+	 * @return \Doctrine\ORM\EntityManager
+	 */
+	private function getEntityManager()
+	{
+		return $this->getContainer()->get('doctrine.orm.entity_manager');
 	}
 
     /**

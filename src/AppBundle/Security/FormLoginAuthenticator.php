@@ -57,6 +57,7 @@ class FormLoginAuthenticator extends AbstractGuardAuthenticator
 
 	public function onAuthenticationFailure(Request $request,
 		AuthenticationException $exception) {
+		$request->getSession()->getFlashBag()->add('danger', 'Invalid credentials');
 		$url = $this->router->generate('security_login');
 		return new RedirectResponse($url);
 	}

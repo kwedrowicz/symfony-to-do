@@ -7,7 +7,8 @@ var concat = require('gulp-concat');
 gulp.task('default', ['css', 'js']);
 
 var styles = [
-    'bower_components/bootstrap/dist/css/bootstrap.min.css'
+    'bower_components/bootstrap/dist/css/bootstrap.min.css',
+    'web/css/own.css'
 ];
 
 gulp.task('css', function(){

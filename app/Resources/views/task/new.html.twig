@@ -4,12 +4,10 @@
     <h1>Task creation</h1>
     {{ form_start(form) }}
         {{ form_widget(form) }}
-        <input type="submit" value="Create" class="btn btn-default"/>
-    {{ form_end(form) }}
+    <span class="btn-group">
+        <input type="submit" value="Create" class="btn btn-primary"/>
+        <a href="{{ path('task_index') }}" class="btn btn-default">Back to the list</a>
+    </span>
 
-    <ul>
-        <li>
-            <a href="{{ path('task_index') }}">Back to the list</a>
-        </li>
-    </ul>
+    {{ form_end(form) }}
 {% endblock %}

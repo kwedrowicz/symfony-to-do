@@ -23,8 +23,16 @@ class TaskController extends Controller
      */
     public function indexAction()
     {
+    	$tasks = $this->getUser()->getTasks();
+
+    	$delete_forms = [];
+	    foreach ($tasks as $task) {
+		    $deleteForms[$task->getId()] = $this->createDeleteForm($task)->createView();
+	    }
+
         return $this->render('task/index.html.twig', array(
-            'tasks' => $this->getUser()->getTasks(),
+            'tasks' => $tasks,
+	        'delete_forms' => $deleteForms
         ));
     }
 

@@ -7,7 +7,7 @@
             <tr>
                 <th>Id</th>
                 <th>Subject</th>
-                <td>Priority</td>
+                <th>Priority</th>
                 <th>Done</th>
                 <th>Actions</th>
             </tr>
@@ -23,6 +23,9 @@
                     <div class="btn-group" role="group" aria-label="...">
                         <a href="{{ path('task_show', { 'id': task.id }) }}" class="btn btn-default">show</a>
                         <a href="{{ path('task_edit', { 'id': task.id }) }}"  class="btn btn-default">edit</a>
+                        {{ form_start(delete_forms[task.id], {'attr': {'class': 'btn-group inline'}}) }}
+                        <input type="submit" value="Delete" class="btn btn-danger radius-right">
+                        {{ form_end(delete_forms[task.id]) }}
                     </div>
                 </td>
             </tr>

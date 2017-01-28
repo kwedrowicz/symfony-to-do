@@ -25,7 +25,7 @@ class TaskController extends Controller
     {
     	$tasks = $this->getUser()->getTasks();
 
-    	$delete_forms = [];
+	    $deleteForms = [];
 	    foreach ($tasks as $task) {
 		    $deleteForms[$task->getId()] = $this->createDeleteForm($task)->createView();
 	    }

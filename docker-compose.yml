@@ -1,0 +1,32 @@
+version: "3"
+
+services:
+    db:
+        image: mysql:5.7
+        ports:
+            - "3307:3306"
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: symfony
+            MYSQL_USER: symfony
+            MYSQL_PASSWORD: symfony
+        networks:
+            symfony_app:
+                aliases:
+                    - mysql
+    app:
+        build: docker/app
+        ports:
+            - "8080:80"
+        depends_on:
+            - db
+        volumes:
+            - .:/code
+        networks:
+            - symfony_app
+
+
+networks:
+    symfony_app:
+
+

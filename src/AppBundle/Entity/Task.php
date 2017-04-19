@@ -53,6 +53,7 @@ class Task
 	 * @var int
 	 *
 	 * @ORM\Column(name="priority", type="integer")
+     * @Assert\NotBlank()
 	 */
 	private $priority = 0;
 

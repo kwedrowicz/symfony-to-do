@@ -1,9 +1,13 @@
 app:
-    resource: "@AppBundle/Controller/"
+    resource: "@AppBundle/Controller/Web"
     type:     annotation
+api:
+    type: rest
+    resource: "routing_api.yml"
+    prefix: /api
 logout:
    path: /logout
 homepage:
    path: /
-   defaults: { _controller: AppBundle:Task:index }
+   defaults: { _controller: AppBundle:Web/Task:index }
    methods: GET

@@ -3,7 +3,6 @@ AppBundle\Entity\User:
         username: test
         email: test@example.com
         plainPassword: test
-
 AppBundle\Entity\Task:
     task_{1..5}:
         subject: <sentence()>

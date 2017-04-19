@@ -16,6 +16,7 @@ services:
                     - mysql
     app:
         build: docker/app
+        container_name: symfonytodo_app
         ports:
             - "8080:80"
         depends_on:

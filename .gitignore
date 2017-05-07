@@ -17,3 +17,4 @@
 /var/SymfonyRequirements.php
 /selenium-server-standalone-3.0.1.jar
 /.idea
+.DS_Store

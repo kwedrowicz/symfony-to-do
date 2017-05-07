@@ -108,3 +108,18 @@ fos_rest:
             'Symfony\Component\Routing\Exception\ResourceNotFoundException': true
 
 nelmio_api_doc: ~
+
+fos_elastica:
+    clients:
+        default: { host: elasticsearch, port: 9200 }
+    indexes:
+        app:
+            types:
+                tag:
+                    properties:
+                        subject: ~
+                    persistence:
+                        driver: orm
+                        model: AppBundle\Entity\Task
+                        provider: ~
+                        finder: ~

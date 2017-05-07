@@ -2,7 +2,7 @@ version: '3'
 services:
   app:
     volumes:
-      - app-sync:/code:rw
+      - app-sync:/code:nocopy
 volumes:
   app-sync:
     external: true

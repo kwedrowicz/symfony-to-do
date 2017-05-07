@@ -6,6 +6,7 @@ use AppBundle\Entity\Task;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -21,14 +22,23 @@ class TaskController extends Controller
      * @Route("/", name="task_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-    	$tasks = $this->getUser()->getTasks();
+        $search = $request->query->get('search');
+        if($search){
+            $finder = $this->get('fos_elastica.finder.app.tag');
+            $tasks = $finder->find($search);
+        }
+        else
+        {
+            $tasks = $this->getUser()->getTasks();
 
+        }
 	    $deleteForms = [];
 	    foreach ($tasks as $task) {
 		    $deleteForms[$task->getId()] = $this->createDeleteForm($task)->createView();
 	    }
+
 
         return $this->render('task/index.html.twig', array(
             'tasks' => $tasks,
@@ -151,7 +161,6 @@ class TaskController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('task_delete', array('id' => $task->getId())))
             ->setMethod('DELETE')
-            ->getForm()
-        ;
+            ->getForm();
     }
 }

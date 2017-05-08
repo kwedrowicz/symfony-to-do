@@ -6,3 +6,4 @@ rules:
 global_exclude_dirs:
     - bower_components
     - node_modules
+    - phpunit-6.1.phar

@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -28,6 +29,11 @@ class Category
      */
     private $name;
 
+    /**
+     * @var ArrayCollection|Task[]
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Task", mappedBy="category")
+     */
+    private $tasks;
 
     /**
      * Get id
@@ -63,4 +69,3 @@ class Category
         return $this->name;
     }
 }
-

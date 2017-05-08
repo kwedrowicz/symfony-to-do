@@ -6,8 +6,8 @@ setfacl -dR -m u:"$HTTPDUSER":rwX -m u:`whoami`:rwX var
 
 php composer.phar install
 php bin/console doctrine:migrations:migrate
+php bin/console doctrine:schema:create --env=test
 php bin/console hautelook:fixtures:load
-
 
 service apache2 start
 

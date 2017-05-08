@@ -16,5 +16,10 @@ services:
         tags:
           - { name: doctrine.event_listener, event: prePersist}
     user_provider:
-            class: AppBundle\Security\UserProvider
-            autowire: true
+        class: AppBundle\Security\UserProvider
+        autowire: true
+    app.form.type.task:
+        class: AppBundle\Form\Type\TaskType
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: form.type }

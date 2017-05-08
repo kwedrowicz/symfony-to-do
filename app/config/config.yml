@@ -115,7 +115,7 @@ fos_elastica:
     indexes:
         app:
             types:
-                tag:
+                task:
                     properties:
                         subject: ~
                     persistence:

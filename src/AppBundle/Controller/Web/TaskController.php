@@ -27,7 +27,7 @@ class TaskController extends Controller
     {
         $search = $request->query->get('search');
         if($search){
-            $finder = $this->get('fos_elastica.finder.app.tag');
+            $finder = $this->get('fos_elastica.finder.app.task');
             $tasks = $finder->find($search);
         }
         else
@@ -68,7 +68,7 @@ class TaskController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($task);
             $em->flush();
-
+            $this->addFlash('success', 'Task created!');
             return $this->redirectToRoute('task_show', array('id' => $task->getId()));
         }
 

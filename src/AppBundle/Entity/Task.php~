@@ -2,7 +2,9 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Task
@@ -29,6 +31,8 @@ class Task
      * @var string
      *
      * @ORM\Column(name="subject", type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\Length(min="3",minMessage = "Subject must be at least {{ limit }} characters long")
      */
     private $subject;
 
@@ -48,12 +52,31 @@ class Task
     private $user;
 
 	/**
-	 * @var string
+	 * @var int
 	 *
-	 * @ORM\Column(name="priority", type="string")
+	 * @ORM\Column(name="priority", type="integer")
+     * @Assert\NotBlank()
 	 */
-	private $priority;
+	private $priority = 0;
 
+    /**
+     * @var Category
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Category", inversedBy="tasks")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
+     */
+	private $category;
+
+    /**
+     * @var ArrayCollection|Tag[]
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Tag", inversedBy="tasks")
+     * @ORM\JoinTable(name="tasks_tags")
+     */
+	private $tags;
+
+	public function __construct()
+    {
+        $this->tags = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -137,11 +160,41 @@ class Task
         return $this->user;
     }
 
-    public function getAvailablePriorities(){
+    public static function getAvailablePriorities(){
     	return [
-    	    self::PRIORITY_NONE,
-		    self::PRIORITY_URGENT,
-		    self::PRIORITY_DEADLINE
+    	    self::PRIORITY_NONE => 0,
+		    self::PRIORITY_URGENT => 1,
+		    self::PRIORITY_DEADLINE => 2
 	    ];
+    }
+
+    /**
+     * Set priority
+     *
+     * @param int $priority
+     *
+     * @return Task
+     */
+    public function setPriority($priority)
+    {
+        $this->priority = $priority;
+
+        return $this;
+    }
+
+    public function setPriorityByName($priority){
+	    $this->priority = self::getAvailablePriorities()[$priority];
+
+	    return $this;
+    }
+
+    /**
+     * Get priority
+     *
+     * @return string
+     */
+    public function getPriority()
+    {
+        return array_search($this->priority, self::getAvailablePriorities());
     }
 }

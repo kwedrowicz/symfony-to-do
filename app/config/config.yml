@@ -123,3 +123,12 @@ fos_elastica:
                         model: AppBundle\Entity\Task
                         provider: ~
                         finder: ~
+
+vich_uploader:
+    db_driver: orm
+
+    mappings:
+        task_image:
+            uri_prefix:         /images/tasks
+            upload_destination: '%kernel.root_dir%/../web/images/tasks'
+            namer:              vich_uploader.namer_origname

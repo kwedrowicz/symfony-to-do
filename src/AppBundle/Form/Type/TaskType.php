@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class TaskType extends AbstractType
 {
@@ -35,7 +36,8 @@ class TaskType extends AbstractType
             ->add('tags', TextType::class)
 	        ->add('priority', ChoiceType::class, array(
 		        'choices' => Task::getAvailablePriorities()
-	        ));
+	        ))
+            ->add('imageFile', VichImageType::class);
 
         $builder->get('tags')->addModelTransformer(new TagsTransformer($this->manager));
     }

@@ -6,7 +6,6 @@ use AppBundle\Entity\Task;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -21,6 +20,8 @@ class TaskController extends Controller
      *
      * @Route("/", name="task_index")
      * @Method("GET")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction(Request $request)
     {
@@ -35,6 +36,7 @@ class TaskController extends Controller
 
         }
 	    $deleteForms = [];
+        /* @var Task $task */
 	    foreach ($tasks as $task) {
 		    $deleteForms[$task->getId()] = $this->createDeleteForm($task)->createView();
 	    }

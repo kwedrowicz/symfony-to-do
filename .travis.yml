@@ -7,8 +7,8 @@ install:
   - composer install
 
 before_script:
-  - bin/console do:da:cr -e=test > /dev/null
-  - bin/console do:sc:cr -e=test > /dev/null
+  - bin/console do:da:cr -e=test
+  - bin/console do:sc:cr -e=test
 
 script:
   - vendor/bin/behat

@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -63,6 +64,7 @@ class Task
 	 *
 	 * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="tasks")
 	 * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @Serializer\Exclude()
 	 */
     private $user;
 
@@ -212,6 +214,15 @@ class Task
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * @return int
+     * @Serializer\VirtualProperty()
+     */
+    public function getUserId()
+    {
+        return $this->getUser()->getId();
     }
 
     public static function getAvailablePriorities(){

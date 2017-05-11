@@ -4,12 +4,14 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Tag
  *
  * @ORM\Table(name="tag")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\TagRepository")
+ * @Serializer\ExclusionPolicy("none")
  */
 class Tag
 {
@@ -32,6 +34,7 @@ class Tag
     /**
      * @var ArrayCollection|Task[]
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Task", mappedBy="tags")
+     * @Serializer\Exclude()
      */
     private $tasks;
 

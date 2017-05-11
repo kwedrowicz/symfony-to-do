@@ -5,12 +5,15 @@ namespace AppBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\Exclude;
+use JMS\Serializer\Annotation\ExclusionPolicy;
 
 /**
  * Category
  *
  * @ORM\Table(name="category")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\CategoryRepository")
+ * @ExclusionPolicy("none")
  */
 class Category
 {
@@ -33,6 +36,7 @@ class Category
     /**
      * @var ArrayCollection|Task[]
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Task", mappedBy="category")
+     * @Exclude()
      */
     private $tasks;
 

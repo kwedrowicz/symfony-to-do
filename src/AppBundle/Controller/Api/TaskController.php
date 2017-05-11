@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: kwedrowicz
- * Date: 18.04.2017
- * Time: 09:51
- */
 
 namespace AppBundle\Controller\Api;
 
@@ -42,7 +36,7 @@ class TaskController extends FOSRestController implements ClassResourceInterface
      * @ApiDoc(
      *     description="Creates Task",
      *     resource=true,
-     *     input="AppBundle\Form\Type\TaskType"
+     *     input="AppBundle\Form\Type\TaskTypeWithoutImage"
      * )
      */
     public function postAction(Request $request)
@@ -72,7 +66,7 @@ class TaskController extends FOSRestController implements ClassResourceInterface
      * @ApiDoc(
      *     description="Updates the Task",
      *     resource=true,
-     *     input="AppBundle\Form\Type\TaskType"
+     *     input="AppBundle\Form\Type\TaskTypeWithoutImage"
      * )
      */
     public function putAction($id, Request $request){

@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Hateoas\Configuration\Annotation as Hateoas;
 
 /**
  * Task
@@ -14,6 +15,17 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * @ORM\Table(name="task")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\TaskRepository")
  * @Vich\Uploadable
+ * @Hateoas\Relation("self",
+ *     href= @Hateoas\Route(
+ *     "api_get_task",
+ *     parameters = { "id" = "expr(object.getId())" }
+ *     )
+ * )
+ * @Hateoas\Relation("parent",
+ *     href= @Hateoas\Route(
+ *     "api_get_tasks"
+ *      )
+ * )
  */
 class Task
 {

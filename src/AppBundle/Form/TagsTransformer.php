@@ -21,12 +21,12 @@ class TagsTransformer implements DataTransformerInterface
     public function transform($tags)
     {
         /* @var ArrayCollection|Tag[] $tags */
+        if(!$tags){
+            return '';
+        }
         $tagsArray = [];
         foreach($tags as $tag){
             $tagsArray[] = $tag->getName();
-        }
-        if(!$tags){
-            return '';
         }
         return implode(', ',$tagsArray);
     }

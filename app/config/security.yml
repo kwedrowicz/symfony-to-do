@@ -24,6 +24,7 @@ security:
                 require_previous_session: false
 
         api:
+            anonymous: ~
             pattern:   ^/api
             stateless: true
             guard:
@@ -61,5 +62,6 @@ security:
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/doc, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
         - { path: ^/, roles: ROLE_USER }

@@ -13,7 +13,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
-class TaskType extends AbstractType
+class TaskTypeWithoutImage extends AbstractType
 {
 
     private $manager;
@@ -29,22 +29,19 @@ class TaskType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-	        ->add('subject')
+            ->add('subject')
             ->add('category', EntityType::class, [
                 'class' => 'AppBundle\Entity\Category'
             ])
             ->add('tags', TextType::class)
-	        ->add('priority', ChoiceType::class, array(
-		        'choices' => Task::getAvailablePriorities()
-	        ))
-            ->add('imageFile', VichImageType::class, array(
-                'required' => false
+            ->add('priority', ChoiceType::class, array(
+                'choices' => Task::getAvailablePriorities()
             ))
         ;
 
         $builder->get('tags')->addModelTransformer(new TagsTransformer($this->manager));
     }
-    
+
     /**
      * {@inheritdoc}
      */

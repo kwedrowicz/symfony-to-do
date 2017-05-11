@@ -23,3 +23,8 @@ services:
         arguments: ["@doctrine.orm.entity_manager"]
         tags:
             - { name: form.type }
+    app.form.type.task_no_image:
+        class: AppBundle\Form\Type\TaskTypeWithoutImage
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: form.type }

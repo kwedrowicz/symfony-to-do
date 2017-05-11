@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -73,17 +74,22 @@ class Category
      */
     public function __construct()
     {
-        $this->tasks = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->tasks = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 
     /**
      * Add task
      *
-     * @param \AppBundle\Entity\Task $task
+     * @param Task $task
      *
      * @return Category
      */
-    public function addTask(\AppBundle\Entity\Task $task)
+    public function addTask(Task $task)
     {
         $this->tasks[] = $task;
 
@@ -93,9 +99,9 @@ class Category
     /**
      * Remove task
      *
-     * @param \AppBundle\Entity\Task $task
+     * @param Task $task
      */
-    public function removeTask(\AppBundle\Entity\Task $task)
+    public function removeTask(Task $task)
     {
         $this->tasks->removeElement($task);
     }
@@ -103,7 +109,7 @@ class Category
     /**
      * Get tasks
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection
      */
     public function getTasks()
     {

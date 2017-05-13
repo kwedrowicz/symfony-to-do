@@ -33,7 +33,7 @@ class TagsTransformer implements DataTransformerInterface
 
     public function reverseTransform($tagsAsString)
     {
-        $tagNames = explode(', ', $tagsAsString);
+        $tagNames = array_map('trim',explode(',', $tagsAsString));
         $collection = new ArrayCollection();
         foreach($tagNames as $name){
             $tag = $this->manager->getRepository('AppBundle:Tag')->findOneBy(['name' => $name]);

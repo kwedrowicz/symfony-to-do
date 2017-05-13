@@ -33,7 +33,6 @@ class TaskController extends Controller
         else
         {
             $tasks = $this->getUser()->getTasks();
-
         }
 	    $deleteForms = [];
         /* @var Task $task */

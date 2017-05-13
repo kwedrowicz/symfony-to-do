@@ -1,5 +1,6 @@
 <?php
 
+use PSS\SymfonyMockerContainer\DependencyInjection\MockerContainer;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
 
@@ -32,9 +33,6 @@ class AppKernel extends Kernel
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
-
-	        $bundles[] = new Nelmio\Alice\Bridge\Symfony\NelmioAliceBundle();
-	        $bundles[] = new Fidry\AliceDataFixtures\Bridge\Symfony\FidryAliceDataFixturesBundle();
 	        $bundles[] = new Hautelook\AliceBundle\HautelookAliceBundle();
         }
 
@@ -59,5 +57,14 @@ class AppKernel extends Kernel
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
         $loader->load($this->getRootDir().'/config/config_'.$this->getEnvironment().'.yml');
+    }
+
+    protected function getContainerBaseClass()
+    {
+        if ('test' === $this->environment) {
+            return MockerContainer::class;
+        }
+
+        return parent::getContainerBaseClass();
     }
 }

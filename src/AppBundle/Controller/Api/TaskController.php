@@ -42,6 +42,7 @@ class TaskController extends FOSRestController implements ClassResourceInterface
     public function postAction(Request $request)
     {
         $task = new Task();
+        $task->setUser($this->getUser());
         $form = $this->createForm('AppBundle\Form\Type\TaskType', $task);
         $data = $request->request->all();
         $form->submit($data);

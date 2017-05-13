@@ -1,0 +1,14 @@
+[
+  {
+    "id": "@integer@",
+    "name": "Home"
+  },
+  {
+    "id": "@integer@",
+    "name": "Studies"
+  },
+  {
+    "id": "@integer@",
+    "name": "Work"
+  }
+]

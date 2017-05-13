@@ -1,0 +1,22 @@
+{
+  "user_id": "@integer@",
+  "id": "@integer@",
+  "subject": "New task",
+  "done": false,
+  "priority": 0,
+  "tags": [
+    {
+      "id": "@integer@",
+      "name": ""
+    }
+  ],
+  "updated_at": "@string@.isDateTime()",
+  "_links": {
+    "self": {
+      "href": "@string@"
+    },
+    "parent": {
+      "href": "/api/tasks"
+    }
+  }
+}

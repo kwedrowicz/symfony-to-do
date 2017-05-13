@@ -1,0 +1,7 @@
+AppBundle\Entity\Category:
+    category_home:
+        name: 'Home'
+    category_work:
+        name: 'Work'
+    category_studies:
+        name: 'Studies'

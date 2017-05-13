@@ -17,6 +17,16 @@
                 <th>Done</th>
                 <td>{% if task.done %}Yes{% else %}No{% endif %}</td>
             </tr>
+            <tr>
+                <th>Tags</th>
+                <td>
+                    <ul>
+                        {% for tag in task.tags %}
+                            <li>{{ tag }}</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
         </tbody>
     </table>
 

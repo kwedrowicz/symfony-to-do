@@ -1,0 +1,17 @@
+{
+  "children": {
+    "subject": {},
+    "category": {},
+    "tags": {},
+    "priority": {
+      "errors": [
+        "This value should not be blank."
+      ]
+    },
+    "imageFile": {
+      "children": {
+        "file": {}
+      }
+    }
+  }
+}

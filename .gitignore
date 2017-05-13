@@ -1,6 +1,5 @@
 /app/config/parameters.yml
 /build/
-/phpunit.xml
 /var/*
 !/var/cache
 /var/cache/*
@@ -16,4 +15,3 @@
 /web/bundles/
 /var/SymfonyRequirements.php
 /selenium-server-standalone-3.0.1.jar
-

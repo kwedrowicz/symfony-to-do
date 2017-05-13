@@ -69,3 +69,4 @@ class TaskControllerTest extends AuthorizedJsonApiTestCase
         return count($tasks);
     }
 }
+

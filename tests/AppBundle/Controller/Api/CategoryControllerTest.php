@@ -23,3 +23,4 @@ class CategoryControllerTest extends AuthorizedJsonApiTestCase
         $this->assertTrue($this->client->getResponse()->isSuccessful());
     }
 }
+

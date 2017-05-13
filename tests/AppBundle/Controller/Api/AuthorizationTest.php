@@ -59,3 +59,4 @@ class AuthorizationTest extends JsonApiTestCase
         );
     }
 }
+

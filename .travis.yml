@@ -27,8 +27,8 @@ before_install:
 
 before_script:
 #  - cp app/config/parameters.yml.travis app/config/parameters.yml
-  - docker exec -i -t symfonytodo_app /bin/bash | bin/console do:da:cr -e=test
-  - docker exec -i -t symfonytodo_app /bin/bash | bin/console do:sc:cr -e=test
+  - docker exec -i -t symfonytodo_app bash -c "bin/console do:da:cr -e=test"
+  - docker exec -i -t symfonytodo_app bash -c "bin/console do:sc:cr -e=test"
 
 script:
-  - docker exec -i -t symfonytodo_app /bin/bash | vendor/bin/behat
+  - docker exec -i -t symfonytodo_app bash -c "vendor/bin/behat"

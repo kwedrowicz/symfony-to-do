@@ -22,13 +22,13 @@ before_install:
   - docker-compose build
   - docker-compose up -d
 
-install:
-  - composer install
+#install:
+#  - composer install
 
 before_script:
-  - cp app/config/parameters.yml.travis app/config/parameters.yml
-  - bin/console do:da:cr -e=test
-  - bin/console do:sc:cr -e=test
+#  - cp app/config/parameters.yml.travis app/config/parameters.yml
+  - docker exec -i -t symfonytodo_app /bin/bash | bin/console do:da:cr -e=test
+  - docker exec -i -t symfonytodo_app /bin/bash | bin/console do:sc:cr -e=test
 
 script:
-  - vendor/bin/behat
+  - docker exec -i -t symfonytodo_app /bin/bash | vendor/bin/behat

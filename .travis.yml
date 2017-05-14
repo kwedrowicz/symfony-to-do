@@ -13,4 +13,3 @@ before_script:
 
 script:
   - vendor/bin/behat
-  - php phpunit-6.1.phar

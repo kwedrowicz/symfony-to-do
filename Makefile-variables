@@ -1,0 +1,15 @@
+APP_ENV = $(shell awk -F= -v key="APP_ENV" '$$1==key {print $$2}' .env)
+SYSTEM_ENV = $(shell awk -F= -v key="SYSTEM" '$$1==key {print $$2}' .env)
+
+# Use dev compose for dev env
+ifeq ($(APP_ENV),dev)
+  export COMPOSE_EXEC_ENV_OPTIONS =
+  ifeq ($(SYSTEM_ENV),mac)
+    export COMPOSE_FILE_OPTION = -f docker-compose.dev.mac.yml
+  else
+    export COMPOSE_FILE_OPTION = -f docker-compose.dev.yml
+  endif
+else
+  export COMPOSE_EXEC_ENV_OPTIONS =
+  export COMPOSE_FILE_OPTION = -f docker-compose.yml
+endif

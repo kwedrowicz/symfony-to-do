@@ -1,5 +1,8 @@
 version: "2"
 
+options:
+  compose-dev-file-path: 'docker-compose.dev.mac.yml'
+
 syncs:
   #IMPORTANT: ensure this name is unique and does not match your other application container name
   app-sync: #tip: add -sync and you keep consistent names als a convention

@@ -21,6 +21,5 @@ before_install:
   - docker-compose -v
   - docker-compose build
   - docker-compose up -d
-
-script:
-  - docker exec symfonytodo_app /bin/bash -c "/code/vendor/bin/behat"
+  - docker ps -a
+  - docker exec -t symfonytodo_app /bin/bash -c "/code/vendor/bin/behat"

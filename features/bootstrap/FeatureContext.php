@@ -1,8 +1,7 @@
 <?php
 
-use Behat\Behat\Context\Context;
-use Behat\Gherkin\Node\PyStringNode;
-use Behat\Gherkin\Node\TableNode;
+namespace Features\Bootstrap;
+
 use Behat\MinkExtension\Context\MinkContext;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 

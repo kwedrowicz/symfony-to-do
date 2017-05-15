@@ -8,3 +8,9 @@ default:
             base_url: http://localhost:8000
             selenium2: ~
             browser_name: chrome
+    suites:
+        test:
+            paths:
+                - %paths.base%/features
+            contexts:
+                - Features\Bootstrap\FeatureContext

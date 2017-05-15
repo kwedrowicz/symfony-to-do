@@ -14,29 +14,6 @@ docker-stop:
 docker-rm:
 	docker-compose ${COMPOSE_FILE_OPTION} rm
 
-build-and-run:
-		@if [ "$(system)" = "" ]; then \
-				echo "system not set"; \
-				exit 1; \
-        fi
-		@docker-compose build
-		@if [ "$(system)" = "mac" ]; then \
-				docker-sync-stack start; \
-		else \
-				docker-compose up; \
-		fi
-
-run:
-		@if [ "$(system)" = "" ]; then \
-				echo "system not set"; \
-				exit 1; \
-		fi
-		@if [ "$(system)" = "mac" ]; then \
-				docker-sync-stack start; \
-		else \
-				docker-compose up; \
-		fi
-
 exec:
 		@docker exec -i -t symfonytodo_app /bin/bash
 

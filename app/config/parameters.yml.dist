@@ -5,8 +5,8 @@ parameters:
     database_host: mysql
     database_port: null
     database_name: symfony
-    database_user: symfony
-    database_password: symfony
+    database_user: root
+    database_password: root
     # You should uncomment this if you want use pdo_sqlite
     # database_path: "%kernel.root_dir%/data.db3"
 

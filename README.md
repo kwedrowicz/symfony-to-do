@@ -9,13 +9,15 @@ A simple Symfony ToDo project for training best practices.
 
 Requirements
 ------------
-`Php 7.0|7.1`
+* `Docker`
+* `Docker-sync` if you are using mac osx
 
-Installation
+Starting project
 ------------
+Copy `.env.dist` to `.env` and configure setting variables. Then just run `make` and everything should build for you. If you want to go into `app` container just type `make exec`
+
+Fast run:
 ```
-php composer install
-php bin/console doctrine:database:create
-php bin/console doctrine:migrations:migrate
-php bin/console hautelook:fixtures:load
+cp .env.dist .env
+make
 ```

@@ -9,28 +9,28 @@
 namespace AppBundle\Security;
 
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 class UserProvider implements UserProviderInterface {
 
 	/**
-	 * @var EntityManager
+	 * @var ManagerRegistry
 	 */
-	private $em;
+	private $mr;
 
-	public function __construct(EntityManager $em) {
-		$this->em = $em;
+	public function __construct(ManagerRegistry $managerRegistry) {
+		$this->mr = $managerRegistry;
 
 	}
 
 	public function loadUserByUsername( $username ) {
-		return $this->em->getRepository('AppBundle:User')->loadUserByUsername($username);
+		return $this->mr->getManager()->getRepository('AppBundle:User')->loadUserByUsername($username);
 	}
 
 	public function refreshUser( UserInterface $user ) {
-		return $this->em->getRepository('AppBundle:User')->loadUserByUsername($user->getUsername());
+		return $this->mr->getManager()->getRepository('AppBundle:User')->loadUserByUsername($user->getUsername());
 	}
 
 	public function supportsClass( $class ) {

@@ -3,10 +3,14 @@ php:
   - '7.0'
   - '7.1'
 
+services:
+  - elasticsearch
+
 install:
   - composer install
 
 before_script:
+  - sleep 10
   - cp app/config/parameters.yml.travis app/config/parameters.yml
   - bin/console do:da:cr -e=test
   - bin/console do:sc:cr -e=test

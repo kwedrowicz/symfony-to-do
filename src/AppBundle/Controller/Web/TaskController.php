@@ -5,8 +5,6 @@ namespace AppBundle\Controller\Web;
 use AppBundle\Entity\Task;
 use Elastica\Query;
 use Elastica\Query\BoolQuery;
-use Elastica\Query\Match;
-use Elastica\QueryBuilder\DSL\Filter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;

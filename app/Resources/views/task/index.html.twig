@@ -11,6 +11,8 @@
             <tr>
                 <th>Id</th>
                 <th>Subject</th>
+                <th>Category</th>
+                <th>Tags</th>
                 <th>Priority</th>
                 <th>Done</th>
                 <th>Actions</th>
@@ -21,6 +23,12 @@
             <tr>
                 <td><a href="{{ path('task_show', { 'id': task.id }) }}">{{ task.id }}</a></td>
                 <td>{{ task.subject }}</td>
+                <td>{{ task.category }}</td>
+                <td>
+                    {% for tag in task.tags %}
+                        {{ tag~' ' }}
+                    {% endfor %}
+                </td>
                 <td>{{ task.priority }}</td>
                 <td>{% if task.done %}Yes{% else %}No{% endif %}</td>
                 <td>

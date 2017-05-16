@@ -118,6 +118,9 @@ fos_elastica:
                 task:
                     properties:
                         subject: ~
+                        user: ~
+                        category: ~
+                        tags: ~
                     persistence:
                         driver: orm
                         model: AppBundle\Entity\Task

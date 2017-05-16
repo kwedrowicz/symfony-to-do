@@ -3,6 +3,10 @@
 namespace AppBundle\Controller\Web;
 
 use AppBundle\Entity\Task;
+use Elastica\Query;
+use Elastica\Query\BoolQuery;
+use Elastica\Query\Match;
+use Elastica\QueryBuilder\DSL\Filter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -28,7 +32,18 @@ class TaskController extends Controller
         $search = $request->query->get('search');
         if($search){
             $finder = $this->get('fos_elastica.finder.app.task');
-            $tasks = $finder->find($search);
+            $boolQuery = new BoolQuery();
+            $fieldQuery = new Query\MultiMatch();
+            $fieldQuery->setQuery($search);
+            $fieldQuery->setFields(['subject', 'category', 'tags']);
+            $boolQuery->addMust($fieldQuery);
+
+
+            $userFilter = new Query\Term();
+            $userFilter->setTerm('user', $this->getUser()->getUsername());
+            $boolQuery->addFilter($userFilter);
+
+            $tasks = $finder->find($boolQuery);
         }
         else
         {

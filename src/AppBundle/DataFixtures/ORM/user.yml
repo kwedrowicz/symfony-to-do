@@ -1,5 +1,5 @@
 AppBundle\Entity\User:
-    test_user:
-        username: test
-        email: test@example.com
+    user_{1..2}:
+        username: test<current()>
+        email: test<current()>@example.com
         plainPassword: test

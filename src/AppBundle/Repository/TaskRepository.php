@@ -1,7 +1,9 @@
 <?php
+declare(strict_types=1);
 
 namespace AppBundle\Repository;
 
+use AppBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -12,4 +14,27 @@ use Doctrine\ORM\EntityRepository;
  */
 class TaskRepository extends EntityRepository
 {
+    public function getCountByDays(User $user, int $days) {
+        return $this->getUsersTaskQuery($user)
+            ->andWhere('t.createdAt > :minusDays')
+            ->groupBy('date')
+            ->orderBy('date')
+            ->setParameter('minusDays',(new \DateTime())->modify("- $days days"))
+            ->select('date(t.createdAt) as date, COUNT(\'date\') as counter ')
+            ->getQuery()->getArrayResult();
+    }
+
+    public function getDoneUndoneCount(User $user) {
+        return $this->getUsersTaskQuery($user)
+            ->groupBy('t.done')
+            ->select('t.done as done, count(t.done) as counter')
+            ->getQuery()->getArrayResult();
+    }
+
+    private function getUsersTaskQuery(User $user) {
+        return $this->createQueryBuilder('t')
+            ->innerJoin('t.user', 'u')
+            ->where('u.id = :userId')
+            ->setParameter('userId', $user->getId());
+    }
 }

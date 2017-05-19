@@ -8,6 +8,9 @@ docker-build:
 docker-up:
 	docker-compose ${COMPOSE_FILE_OPTION} up -d
 
+docker-up-no-deamon:
+	docker-compose ${COMPOSE_FILE_OPTION} up
+
 docker-stop:
 	docker-compose ${COMPOSE_FILE_OPTION} stop
 

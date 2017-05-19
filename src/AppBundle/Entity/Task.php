@@ -2,13 +2,16 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Constants\TaskPriority;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Hateoas\Configuration\Annotation as Hateoas;
+
 
 /**
  * Task
@@ -30,9 +33,7 @@ use Hateoas\Configuration\Annotation as Hateoas;
  */
 class Task
 {
-	const PRIORITY_NONE = 'none';
-	const PRIORITY_URGENT = 'urgent';
-	const PRIORITY_DEADLINE = 'deadline';
+    use TimestampableEntity;
 
     /**
      * @var int
@@ -113,12 +114,6 @@ class Task
      */
     private $imageSize;
 
-    /**
-     * @ORM\Column(type="datetime")
-     *
-     * @var \DateTime
-     */
-    private $updatedAt;
 
     /**
      * @return integer|null
@@ -131,7 +126,6 @@ class Task
 	public function __construct()
     {
         $this->tags = new ArrayCollection();
-        $this->updatedAt = new \DateTime();
     }
 
     /**
@@ -227,9 +221,9 @@ class Task
 
     public static function getAvailablePriorities(){
     	return [
-    	    self::PRIORITY_NONE => 0,
-		    self::PRIORITY_URGENT => 1,
-		    self::PRIORITY_DEADLINE => 2
+    	    TaskPriority::NONE => 0,
+            TaskPriority::URGENT => 1,
+            TaskPriority::DEADLINE => 2
 	    ];
     }
 
@@ -369,29 +363,5 @@ class Task
     public function setImageSize($imageSize)
     {
         $this->imageSize = $imageSize;
-    }
-
-    /**
-     * Set updatedAt
-     *
-     * @param \DateTime $updatedAt
-     *
-     * @return Task
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    /**
-     * Get updatedAt
-     *
-     * @return \DateTime
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
     }
 }

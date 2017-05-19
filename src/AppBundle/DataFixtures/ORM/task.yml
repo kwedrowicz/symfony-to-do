@@ -4,3 +4,4 @@ AppBundle\Entity\Task:
         user: '@user_1'
         category: '@category_*'
         tags: ['@tag_*']
+        createdAt: '<dateTimeBetween("-200 days", "now")>'

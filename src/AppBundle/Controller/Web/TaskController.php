@@ -28,25 +28,19 @@ class TaskController extends Controller
     public function indexAction(Request $request)
     {
         $search = $request->query->get('search');
+        $finder = $this->get('fos_elastica.finder.app.task');
+        $boolQuery = new BoolQuery();
         if($search){
-            $finder = $this->get('fos_elastica.finder.app.task');
-            $boolQuery = new BoolQuery();
             $fieldQuery = new Query\MultiMatch();
             $fieldQuery->setQuery($search);
             $fieldQuery->setFields(['subject', 'category', 'tags']);
             $boolQuery->addMust($fieldQuery);
-
-
-            $userFilter = new Query\Term();
-            $userFilter->setTerm('user', $this->getUser()->getUsername());
-            $boolQuery->addFilter($userFilter);
-
-            $tasks = $finder->find($boolQuery);
         }
-        else
-        {
-            $tasks = $this->getUser()->getTasks();
-        }
+        $userFilter = new Query\Term();
+        $userFilter->setTerm('user', $this->getUser()->getUsername());
+        $boolQuery->addFilter($userFilter);
+
+        $tasks = $finder->find($boolQuery, 1000);
 	    $deleteForms = [];
         /* @var Task $task */
 	    foreach ($tasks as $task) {

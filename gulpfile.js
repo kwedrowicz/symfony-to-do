@@ -21,7 +21,9 @@ gulp.task('css', function(){
 
 var assets = [
     "bower_components/jquery/dist/jquery.min.js",
-    "bower_components/bootstrap/dist/js/bootstrap.min.js"
+    "bower_components/bootstrap/dist/js/bootstrap.min.js",
+    "bower_components/highcharts/highcharts.js",
+    "bower_components/highcharts/modules/exporting.js"
 ];
 
 gulp.task('js', function () {

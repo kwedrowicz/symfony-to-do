@@ -1,0 +1,5 @@
+AppBundle\Entity\User:
+    user_{1..100}:
+        username: test<current()>
+        email: test<current()>@example.com
+        plainPassword: test

@@ -3,6 +3,7 @@
 namespace AppBundle\Controller\Web;
 
 use Ob\HighchartsBundle\Highcharts\Highchart;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
@@ -13,6 +14,7 @@ class StatisticController extends Controller
 {
     /**
      * @Route("/")
+     * @Method("GET")
      */
     public function indexAction()
     {

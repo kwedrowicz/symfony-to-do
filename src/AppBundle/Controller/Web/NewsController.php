@@ -3,6 +3,7 @@
 
 namespace AppBundle\Controller\Web;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,6 +15,7 @@ class NewsController extends Controller
 {
     /**
      * @Route("/")
+     * @Method("GET")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */

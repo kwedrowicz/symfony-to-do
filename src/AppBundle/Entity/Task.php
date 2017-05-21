@@ -12,7 +12,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Hateoas\Configuration\Annotation as Hateoas;
 
-
 /**
  * Task
  *
@@ -60,36 +59,36 @@ class Task
      */
     private $done = false;
 
-	/**
-	 * @var User
-	 *
-	 * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="tasks")
-	 * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+    /**
+     * @var User
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="tasks")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      * @Serializer\Exclude()
-	 */
+     */
     private $user;
 
-	/**
-	 * @var int
-	 *
-	 * @ORM\Column(name="priority", type="integer")
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="priority", type="integer")
      * @Assert\NotBlank()
-	 */
-	private $priority = 0;
+     */
+    private $priority = 0;
 
     /**
      * @var Category
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Category", inversedBy="tasks")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
      */
-	private $category;
+    private $category;
 
     /**
      * @var ArrayCollection|Tag[]
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Tag", inversedBy="tasks", cascade={"persist"})
      * @ORM\JoinTable(name="tasks_tags")
      */
-	private $tags;
+    private $tags;
 
     /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
@@ -123,7 +122,7 @@ class Task
         return $this->imageSize;
     }
 
-	public function __construct()
+    public function __construct()
     {
         $this->tags = new ArrayCollection();
     }
@@ -219,12 +218,13 @@ class Task
         return $this->getUser()->getId();
     }
 
-    public static function getAvailablePriorities(){
-    	return [
-    	    TaskPriority::NONE => 0,
+    public static function getAvailablePriorities()
+    {
+        return [
+            TaskPriority::NONE => 0,
             TaskPriority::URGENT => 1,
             TaskPriority::DEADLINE => 2
-	    ];
+        ];
     }
 
     /**
@@ -241,10 +241,11 @@ class Task
         return $this;
     }
 
-    public function setPriorityByName($priority){
-	    $this->priority = self::getAvailablePriorities()[$priority];
+    public function setPriorityByName($priority)
+    {
+        $this->priority = self::getAvailablePriorities()[$priority];
 
-	    return $this;
+        return $this;
     }
 
     /**
@@ -315,7 +316,8 @@ class Task
         return $this->tags;
     }
 
-    public function setTags(ArrayCollection $tags){
+    public function setTags(ArrayCollection $tags)
+    {
         $this->tags = $tags;
     }
 

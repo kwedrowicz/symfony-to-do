@@ -8,32 +8,35 @@
 
 namespace AppBundle\Security;
 
-
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
-class UserProvider implements UserProviderInterface {
+class UserProvider implements UserProviderInterface
+{
 
-	/**
-	 * @var ManagerRegistry
-	 */
-	private $mr;
+    /**
+     * @var ManagerRegistry
+     */
+    private $mr;
 
-	public function __construct(ManagerRegistry $managerRegistry) {
-		$this->mr = $managerRegistry;
+    public function __construct(ManagerRegistry $managerRegistry)
+    {
+        $this->mr = $managerRegistry;
+    }
 
-	}
+    public function loadUserByUsername($username)
+    {
+        return $this->mr->getManager()->getRepository('AppBundle:User')->loadUserByUsername($username);
+    }
 
-	public function loadUserByUsername( $username ) {
-		return $this->mr->getManager()->getRepository('AppBundle:User')->loadUserByUsername($username);
-	}
+    public function refreshUser(UserInterface $user)
+    {
+        return $this->mr->getManager()->getRepository('AppBundle:User')->loadUserByUsername($user->getUsername());
+    }
 
-	public function refreshUser( UserInterface $user ) {
-		return $this->mr->getManager()->getRepository('AppBundle:User')->loadUserByUsername($user->getUsername());
-	}
-
-	public function supportsClass( $class ) {
-		return $class == 'AppBundle\Entity\User';
-	}
+    public function supportsClass($class)
+    {
+        return $class == 'AppBundle\Entity\User';
+    }
 }

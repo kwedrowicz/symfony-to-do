@@ -6,7 +6,6 @@ use AppBundle\Service\AuthorizedJsonApiTestCase;
 
 class CategoryControllerTest extends AuthorizedJsonApiTestCase
 {
-
     public function testCgetAction()
     {
         $this->client->request('GET', '/api/categories', array(), array(), $this->headers);
@@ -23,4 +22,3 @@ class CategoryControllerTest extends AuthorizedJsonApiTestCase
         $this->assertTrue($this->client->getResponse()->isSuccessful());
     }
 }
-

@@ -24,7 +24,7 @@ class StatisticController extends Controller
             array("name" => "Data Serie Name", "data" => array())
         );
 
-        foreach($tasksCountByDays as $day){
+        foreach ($tasksCountByDays as $day) {
             $series[0]['data'][] = [strtotime($day['date'])*1000, intval($day['counter'])];
         }
 
@@ -50,7 +50,7 @@ class StatisticController extends Controller
             array("name" => "Data Serie Name", "data" => array())
         );
 
-        foreach($tasksDoneUndoneCount as $el){
+        foreach ($tasksDoneUndoneCount as $el) {
             $series2[0]['data'][] = [$el['done'] ? 'done' : 'not done', intval($el['counter'])];
         }
 
@@ -61,5 +61,4 @@ class StatisticController extends Controller
             'chart2' => $ob2
         ));
     }
-
 }

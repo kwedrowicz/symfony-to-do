@@ -14,7 +14,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class TaskTypeWithoutImage extends AbstractType
 {
-
     private $manager;
 
     public function __construct(ObjectManager $manager)
@@ -62,6 +61,4 @@ class TaskTypeWithoutImage extends AbstractType
     {
         return 'appbundle_task';
     }
-
-
 }

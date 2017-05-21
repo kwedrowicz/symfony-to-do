@@ -2,7 +2,6 @@
 
 namespace tests\AppBundle\Controller\Api;
 
-
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class ApiDocTest extends WebTestCase
@@ -14,4 +13,3 @@ class ApiDocTest extends WebTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 }
-

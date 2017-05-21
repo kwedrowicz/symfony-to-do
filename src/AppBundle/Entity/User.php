@@ -22,113 +22,120 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class User implements UserInterface, \Serializable
 {
-	/**
-	 * @ORM\Column(type="integer")
-	 * @ORM\Id
-	 * @ORM\GeneratedValue(strategy="AUTO")
-	 */
-	private $id;
+    /**
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
 
-	/**
-	 * @ORM\Column(type="string", length=25, unique=true)
-	 * @Assert\NotBlank()
-	 */
-	private $username;
+    /**
+     * @ORM\Column(type="string", length=25, unique=true)
+     * @Assert\NotBlank()
+     */
+    private $username;
 
-	/**
-	 * @ORM\Column(type="string", length=64)
-	 */
-	private $password;
+    /**
+     * @ORM\Column(type="string", length=64)
+     */
+    private $password;
 
-	/**
-	 * @ORM\Column(type="string", length=60, unique=true)
-	 * @Assert\NotBlank()
-	 * @Assert\Email()
-	 */
-	private $email;
+    /**
+     * @ORM\Column(type="string", length=60, unique=true)
+     * @Assert\NotBlank()
+     * @Assert\Email()
+     */
+    private $email;
 
-	/**
-	 * @Assert\NotBlank()
-	 * @Assert\Length(max=4096)
-	 */
-	private $plainPassword;
+    /**
+     * @Assert\NotBlank()
+     * @Assert\Length(max=4096)
+     */
+    private $plainPassword;
 
-	/**
-	 * @var ArrayCollection|Task[]
-	 *
-	 * @ORM\OneToMany(targetEntity="AppBundle\Entity\Task", mappedBy="user")
-	 * @ORM\OrderBy({"priority"="DESC"})
-	 */
-	private $tasks;
+    /**
+     * @var ArrayCollection|Task[]
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Task", mappedBy="user")
+     * @ORM\OrderBy({"priority"="DESC"})
+     */
+    private $tasks;
 
-	public function __construct() {
-		$this->tasks = new ArrayCollection();
-	}
+    public function __construct()
+    {
+        $this->tasks = new ArrayCollection();
+    }
 
-	public function __toString() {
-		return $this->getUsername();
-	}
+    public function __toString()
+    {
+        return $this->getUsername();
+    }
 
-	/**
-	 * Returns the roles granted to the user.
-	 *
-	 * <code>
-	 * public function getRoles()
-	 * {
-	 *     return array('ROLE_USER');
-	 * }
-	 * </code>
-	 *
-	 * Alternatively, the roles might be stored on a ``roles`` property,
-	 * and populated in any number of different ways when the user object
-	 * is created.
-	 *
-	 * @return (Role|string)[] The user roles
-	 */
-	public function getRoles() {
-		return array('ROLE_USER', 'ROLE_API');
-	}
+    /**
+     * Returns the roles granted to the user.
+     *
+     * <code>
+     * public function getRoles()
+     * {
+     *     return array('ROLE_USER');
+     * }
+     * </code>
+     *
+     * Alternatively, the roles might be stored on a ``roles`` property,
+     * and populated in any number of different ways when the user object
+     * is created.
+     *
+     * @return (Role|string)[] The user roles
+     */
+    public function getRoles()
+    {
+        return array('ROLE_USER', 'ROLE_API');
+    }
 
-	/**
-	 * Returns the password used to authenticate the user.
-	 *
-	 * This should be the encoded password. On authentication, a plain-text
-	 * password will be salted, encoded, and then compared to this value.
-	 *
-	 * @return string The password
-	 */
-	public function getPassword() {
-		return $this->password;
-	}
+    /**
+     * Returns the password used to authenticate the user.
+     *
+     * This should be the encoded password. On authentication, a plain-text
+     * password will be salted, encoded, and then compared to this value.
+     *
+     * @return string The password
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
 
-	/**
-	 * Returns the salt that was originally used to encode the password.
-	 *
-	 * This can return null if the password was not encoded using a salt.
-	 *
-	 * @return string|null The salt
-	 */
-	public function getSalt() {
-		return null;
-	}
+    /**
+     * Returns the salt that was originally used to encode the password.
+     *
+     * This can return null if the password was not encoded using a salt.
+     *
+     * @return string|null The salt
+     */
+    public function getSalt()
+    {
+        return null;
+    }
 
-	/**
-	 * Returns the username used to authenticate the user.
-	 *
-	 * @return string The username
-	 */
-	public function getUsername() {
-		return $this->username;
-	}
+    /**
+     * Returns the username used to authenticate the user.
+     *
+     * @return string The username
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
 
-	/**
-	 * Removes sensitive data from the user.
-	 *
-	 * This is important if, at any given point, sensitive information like
-	 * the plain-text password is stored on this object.
-	 */
-	public function eraseCredentials() {
-	}
+    /**
+     * Removes sensitive data from the user.
+     *
+     * This is important if, at any given point, sensitive information like
+     * the plain-text password is stored on this object.
+     */
+    public function eraseCredentials()
+    {
+    }
 
     /**
      * Get id
@@ -154,25 +161,25 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
-	/** @see \Serializable::serialize() */
-	public function serialize()
-	{
-		return serialize(array(
-			$this->id,
-			$this->username,
-			$this->password
-		));
-	}
+    /** @see \Serializable::serialize() */
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->username,
+            $this->password
+        ));
+    }
 
-	/** @see \Serializable::unserialize() */
-	public function unserialize($serialized)
-	{
-		list (
-			$this->id,
-			$this->username,
-			$this->password
-			) = unserialize($serialized);
-	}
+    /** @see \Serializable::unserialize() */
+    public function unserialize($serialized)
+    {
+        list(
+            $this->id,
+            $this->username,
+            $this->password
+            ) = unserialize($serialized);
+    }
 
     /**
      * Set password
@@ -212,15 +219,15 @@ class User implements UserInterface, \Serializable
         return $this->email;
     }
 
-	public function getPlainPassword()
-	{
-		return $this->plainPassword;
-	}
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
 
-	public function setPlainPassword($password)
-	{
-		$this->plainPassword = $password;
-	}
+    public function setPlainPassword($password)
+    {
+        $this->plainPassword = $password;
+    }
 
     /**
      * Add task

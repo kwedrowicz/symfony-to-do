@@ -3,7 +3,6 @@
 
 namespace AppBundle\Controller\Api;
 
-
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Routing\ClassResourceInterface;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;

@@ -21,23 +21,23 @@ class TagsTransformer implements DataTransformerInterface
     public function transform($tags)
     {
         /* @var ArrayCollection|Tag[] $tags */
-        if(!$tags){
+        if (!$tags) {
             return '';
         }
         $tagsArray = [];
-        foreach($tags as $tag){
+        foreach ($tags as $tag) {
             $tagsArray[] = $tag->getName();
         }
-        return implode(', ',$tagsArray);
+        return implode(', ', $tagsArray);
     }
 
     public function reverseTransform($tagsAsString)
     {
-        $tagNames = array_map('trim',explode(',', $tagsAsString));
+        $tagNames = array_map('trim', explode(',', $tagsAsString));
         $collection = new ArrayCollection();
-        foreach($tagNames as $name){
+        foreach ($tagNames as $name) {
             $tag = $this->manager->getRepository('AppBundle:Tag')->findOneBy(['name' => $name]);
-            if(!$tag){
+            if (!$tag) {
                 $tag = new Tag();
                 $tag->setName($name);
             }

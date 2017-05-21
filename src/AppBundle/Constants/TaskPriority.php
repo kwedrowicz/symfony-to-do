@@ -3,7 +3,6 @@
 
 namespace AppBundle\Constants;
 
-
 abstract class TaskPriority
 {
     const NONE = 'none';

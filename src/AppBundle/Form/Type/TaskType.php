@@ -15,7 +15,6 @@ use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class TaskType extends AbstractType
 {
-
     private $manager;
 
     public function __construct(ObjectManager $manager)
@@ -29,14 +28,14 @@ class TaskType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-	        ->add('subject')
+            ->add('subject')
             ->add('category', EntityType::class, [
                 'class' => 'AppBundle\Entity\Category'
             ])
             ->add('tags', TextType::class)
-	        ->add('priority', ChoiceType::class, array(
-		        'choices' => Task::getAvailablePriorities()
-	        ))
+            ->add('priority', ChoiceType::class, array(
+                'choices' => Task::getAvailablePriorities()
+            ))
             ->add('imageFile', VichImageType::class, array(
                 'required' => false
             ))
@@ -66,6 +65,4 @@ class TaskType extends AbstractType
     {
         return 'appbundle_task';
     }
-
-
 }

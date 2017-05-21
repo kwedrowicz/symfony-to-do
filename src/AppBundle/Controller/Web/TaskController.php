@@ -28,7 +28,7 @@ class TaskController extends Controller
      */
     public function indexAction(Request $request)
     {
-        if($this->get('kernel')->getEnvironment() != 'test') {
+        if ($this->get('kernel')->getEnvironment() != 'test') {
             $search = $request->query->get('search');
             /** @var TaskRepository $repository */
             $repository = $this->get('fos_elastica.manager')->getRepository('AppBundle:Task');
@@ -37,28 +37,28 @@ class TaskController extends Controller
         } else {
             $tasks = $this->getUser()->getTasks();
         }
-	    $deleteForms = [];
+        $deleteForms = [];
         /* @var Task $task */
-	    foreach ($tasks as $task) {
-		    $deleteForms[$task->getId()] = $this->createDeleteForm($task)->createView();
-	    }
+        foreach ($tasks as $task) {
+            $deleteForms[$task->getId()] = $this->createDeleteForm($task)->createView();
+        }
 
 
         return $this->render('task/index.html.twig', array(
             'tasks' => $tasks,
-	        'delete_forms' => $deleteForms
+            'delete_forms' => $deleteForms
         ));
     }
 
-	/**
-	 * Creates a new task entity.
-	 *
-	 * @Route("/new", name="task_new")
-	 * @Method({"GET", "POST"})
-	 * @param Request $request
-	 *
-	 * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
-	 */
+    /**
+     * Creates a new task entity.
+     *
+     * @Route("/new", name="task_new")
+     * @Method({"GET", "POST"})
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function newAction(Request $request)
     {
         $task = new Task();
@@ -80,15 +80,15 @@ class TaskController extends Controller
         ));
     }
 
-	/**
-	 * Finds and displays a task entity.
-	 *
-	 * @Route("/{id}", name="task_show")
-	 * @Method("GET")
-	 * @param Task $task
-	 *
-	 * @return \Symfony\Component\HttpFoundation\Response
-	 */
+    /**
+     * Finds and displays a task entity.
+     *
+     * @Route("/{id}", name="task_show")
+     * @Method("GET")
+     * @param Task $task
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function showAction(Task $task)
     {
         $deleteForm = $this->createDeleteForm($task);
@@ -99,16 +99,16 @@ class TaskController extends Controller
         ));
     }
 
-	/**
-	 * Displays a form to edit an existing task entity.
-	 *
-	 * @Route("/{id}/edit", name="task_edit")
-	 * @Method({"GET", "POST"})
-	 * @param Request $request
-	 * @param Task $task
-	 *
-	 * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
-	 */
+    /**
+     * Displays a form to edit an existing task entity.
+     *
+     * @Route("/{id}/edit", name="task_edit")
+     * @Method({"GET", "POST"})
+     * @param Request $request
+     * @param Task $task
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function editAction(Request $request, Task $task)
     {
         $deleteForm = $this->createDeleteForm($task);
@@ -129,16 +129,16 @@ class TaskController extends Controller
         ));
     }
 
-	/**
-	 * Deletes a task entity.
-	 *
-	 * @Route("/{id}", name="task_delete")
-	 * @Method("DELETE")
-	 * @param Request $request
-	 * @param Task $task
-	 *
-	 * @return \Symfony\Component\HttpFoundation\RedirectResponse
-	 */
+    /**
+     * Deletes a task entity.
+     *
+     * @Route("/{id}", name="task_delete")
+     * @Method("DELETE")
+     * @param Request $request
+     * @param Task $task
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function deleteAction(Request $request, Task $task)
     {
         $form = $this->createDeleteForm($task);

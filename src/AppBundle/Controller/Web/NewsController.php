@@ -19,7 +19,8 @@ class NewsController extends Controller
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction(Request $request){
+    public function indexAction(Request $request)
+    {
         $news = $this->getDoctrine()->getRepository('AppBundle:News')->findAll();
         $response =  $this->render('news/index.html.twig', [
             'news' => $news

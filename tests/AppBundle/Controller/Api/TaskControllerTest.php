@@ -6,7 +6,6 @@ use AppBundle\Service\AuthorizedJsonApiTestCase;
 
 class TaskControllerTest extends AuthorizedJsonApiTestCase
 {
-
     public function testCgetAction()
     {
         $this->client->request('GET', '/api/tasks', array(), array(), $this->headers);
@@ -42,7 +41,7 @@ class TaskControllerTest extends AuthorizedJsonApiTestCase
         $this->client->request('GET', '/api/tasks', array(), array(), $this->headers);
         $tasks = json_decode($this->client->getResponse()->getContent(), true);
         $id = $tasks[0]['id'];
-        $this->client->request('GET', "/api/tasks/$id",[],[],$this->headers);
+        $this->client->request('GET', "/api/tasks/$id", [], [], $this->headers);
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
     }
 
@@ -69,4 +68,3 @@ class TaskControllerTest extends AuthorizedJsonApiTestCase
         return count($tasks);
     }
 }
-

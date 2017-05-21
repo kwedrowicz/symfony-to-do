@@ -70,7 +70,8 @@ class TaskController extends FOSRestController implements ClassResourceInterface
      *     input="AppBundle\Form\Type\TaskTypeWithoutImage"
      * )
      */
-    public function putAction($id, Request $request){
+    public function putAction($id, Request $request)
+    {
         $task = $this->getDoctrine()->getRepository('AppBundle:Task')->find($id);
         if ($task === null) {
             throw new ResourceNotFoundException("Task not found");
@@ -120,7 +121,7 @@ class TaskController extends FOSRestController implements ClassResourceInterface
     public function deleteAction($id)
     {
         $task = $this->getDoctrine()->getRepository('AppBundle:Task')->find($id);
-        if($task === null){
+        if ($task === null) {
             throw new ResourceNotFoundException("Task not found");
         }
         $em = $this->getDoctrine()->getManager();

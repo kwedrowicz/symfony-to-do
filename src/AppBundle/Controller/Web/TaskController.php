@@ -4,8 +4,6 @@ namespace AppBundle\Controller\Web;
 
 use AppBundle\Entity\Task;
 use AppBundle\SearchRepository\TaskRepository;
-use Elastica\Query;
-use Elastica\Query\BoolQuery;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;

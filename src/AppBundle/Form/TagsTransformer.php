@@ -1,6 +1,5 @@
 <?php
 
-
 namespace AppBundle\Form;
 
 use AppBundle\Entity\Tag;
@@ -17,7 +16,6 @@ class TagsTransformer implements DataTransformerInterface
         $this->manager = $manager;
     }
 
-
     public function transform($tags)
     {
         /* @var ArrayCollection|Tag[] $tags */
@@ -28,6 +26,7 @@ class TagsTransformer implements DataTransformerInterface
         foreach ($tags as $tag) {
             $tagsArray[] = $tag->getName();
         }
+
         return implode(', ', $tagsArray);
     }
 
@@ -43,6 +42,7 @@ class TagsTransformer implements DataTransformerInterface
             }
             $collection->add($tag);
         }
+
         return $collection;
     }
 }

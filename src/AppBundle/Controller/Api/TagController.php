@@ -1,6 +1,5 @@
 <?php
 
-
 namespace AppBundle\Controller\Api;
 
 use FOS\RestBundle\Controller\FOSRestController;
@@ -31,8 +30,9 @@ class TagController extends FOSRestController implements ClassResourceInterface
     {
         $task = $this->getDoctrine()->getRepository('AppBundle:Tag')->find($id);
         if ($task === null) {
-            throw new ResourceNotFoundException("Tag not found");
+            throw new ResourceNotFoundException('Tag not found');
         }
+
         return $task;
     }
 }

@@ -9,7 +9,7 @@ class CategoryControllerTest extends AuthorizedJsonApiTestCase
     public function testCgetAction()
     {
         $this->client->request('GET', '/api/categories', array(), array(), $this->headers);
-        $response =  $this->client->getResponse();
+        $response = $this->client->getResponse();
         $this->assertResponse($response, 'categories');
     }
 

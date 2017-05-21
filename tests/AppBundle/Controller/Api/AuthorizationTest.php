@@ -23,7 +23,7 @@ class AuthorizationTest extends JsonApiTestCase
     {
         $client = self::createClient();
         $headers = array(
-            'HTTP_AUTHORIZATION' => "Bearer 1231231231312",
+            'HTTP_AUTHORIZATION' => 'Bearer 1231231231312',
             'CONTENT_TYPE' => 'application/json',
         );
         $client->request('GET', $url, array(), array(), $headers);
@@ -55,7 +55,7 @@ class AuthorizationTest extends JsonApiTestCase
         return array(
             array('/api/tasks'),
             array('/api/categories'),
-            array('/api/tags')
+            array('/api/tags'),
         );
     }
 }

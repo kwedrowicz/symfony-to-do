@@ -53,6 +53,7 @@ class FeatureContext extends MinkContext
     {
         return $this->getSession()->getPage();
     }
+
     /**
      * @return \Doctrine\ORM\EntityManager
      */

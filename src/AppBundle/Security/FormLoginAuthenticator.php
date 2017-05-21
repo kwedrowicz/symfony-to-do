@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: Krzysztof Wędrowicz krzysztof@wedrowicz.me
  * Date: 14.01.17
- * Time: 23:22
+ * Time: 23:22.
  */
 
 namespace AppBundle\Security;
@@ -41,6 +41,7 @@ class FormLoginAuthenticator extends AbstractGuardAuthenticator
         if ($request->getPathInfo() != '/login_check') {
             return;
         }
+
         return [
             'username' => $request->request->get('_username'),
             'password' => $request->request->get('_password'),
@@ -50,12 +51,14 @@ class FormLoginAuthenticator extends AbstractGuardAuthenticator
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
         $username = $credentials['username'];
+
         return $userProvider->loadUserByUsername($username);
     }
 
     public function checkCredentials($credentials, UserInterface $user)
     {
         $password = $credentials['password'];
+
         return $this->encoder->isPasswordValid($user, $password);
     }
 
@@ -64,6 +67,7 @@ class FormLoginAuthenticator extends AbstractGuardAuthenticator
     {
         $request->getSession()->getFlashBag()->add('danger', 'Invalid credentials');
         $url = $this->router->generate('security_login');
+
         return new RedirectResponse($url);
     }
 
@@ -71,12 +75,14 @@ class FormLoginAuthenticator extends AbstractGuardAuthenticator
         TokenInterface $token, $providerKey)
     {
         $url = $this->router->generate('homepage');
+
         return new RedirectResponse($url);
     }
 
     public function start(Request $request, AuthenticationException $e = null)
     {
         $url = $this->router->generate('security_login');
+
         return new RedirectResponse($url);
     }
 

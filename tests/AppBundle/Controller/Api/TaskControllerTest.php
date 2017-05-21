@@ -9,7 +9,7 @@ class TaskControllerTest extends AuthorizedJsonApiTestCase
     public function testCgetAction()
     {
         $this->client->request('GET', '/api/tasks', array(), array(), $this->headers);
-        $response =  $this->client->getResponse();
+        $response = $this->client->getResponse();
         $this->assertTrue($response->isSuccessful());
         $tasks = json_decode($response->getContent(), true);
         $this->assertEquals(5, count($tasks));
@@ -19,7 +19,7 @@ class TaskControllerTest extends AuthorizedJsonApiTestCase
     {
         $params = [
             'subject' => 'New task',
-            'priority' => 0
+            'priority' => 0,
         ];
         $this->client->request('POST', '/api/tasks', $params, [], $this->headers);
         $this->assertEquals($this->client->getResponse()->getStatusCode(), 302);
@@ -30,7 +30,7 @@ class TaskControllerTest extends AuthorizedJsonApiTestCase
     public function testPostNoPriorityAction()
     {
         $params = [
-            'subject' => 'New task'
+            'subject' => 'New task',
         ];
         $this->client->request('POST', '/api/tasks', $params, [], $this->headers);
         $this->assertResponse($this->client->getResponse(), 'new_task_no_priority', 400);
@@ -50,7 +50,7 @@ class TaskControllerTest extends AuthorizedJsonApiTestCase
         $this->client->followRedirects(true);
         $params = [
             'subject' => 'New task',
-            'priority' => 0
+            'priority' => 0,
         ];
         $this->client->request('POST', '/api/tasks', $params, [], $this->headers);
         $task = json_decode($this->client->getResponse()->getContent(), true);
@@ -65,6 +65,7 @@ class TaskControllerTest extends AuthorizedJsonApiTestCase
     {
         $this->client->request('GET', '/api/tasks', array(), array(), $this->headers);
         $tasks = json_decode($this->client->getResponse()->getContent(), true);
+
         return count($tasks);
     }
 }

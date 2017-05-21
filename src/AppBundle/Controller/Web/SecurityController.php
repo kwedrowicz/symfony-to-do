@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: Krzysztof Wędrowicz krzysztof@wedrowicz.me
  * Date: 14.01.17
- * Time: 23:17
+ * Time: 23:17.
  */
 
 namespace AppBundle\Controller\Web;
@@ -20,6 +20,7 @@ class SecurityController extends Controller
     {
         return $this->render('security/login.html.twig');
     }
+
     /**
      * @Route("/login_check", name="login_check", methods={"GET","POST"})
      */

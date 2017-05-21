@@ -23,7 +23,9 @@ class TaskController extends Controller
      * @Route("/", name="task_index")
      * @Method("GET")
      * @Cache(expires="+2 days")
+     *
      * @param Request $request
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction(Request $request)
@@ -43,10 +45,9 @@ class TaskController extends Controller
             $deleteForms[$task->getId()] = $this->createDeleteForm($task)->createView();
         }
 
-
         return $this->render('task/index.html.twig', array(
             'tasks' => $tasks,
-            'delete_forms' => $deleteForms
+            'delete_forms' => $deleteForms,
         ));
     }
 
@@ -55,6 +56,7 @@ class TaskController extends Controller
      *
      * @Route("/new", name="task_new")
      * @Method({"GET", "POST"})
+     *
      * @param Request $request
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
@@ -71,6 +73,7 @@ class TaskController extends Controller
             $em->persist($task);
             $em->flush();
             $this->addFlash('success', 'Task created!');
+
             return $this->redirectToRoute('task_show', array('id' => $task->getId()));
         }
 
@@ -85,6 +88,7 @@ class TaskController extends Controller
      *
      * @Route("/{id}", name="task_show")
      * @Method("GET")
+     *
      * @param Task $task
      *
      * @return \Symfony\Component\HttpFoundation\Response
@@ -95,7 +99,7 @@ class TaskController extends Controller
 
         return $this->render('task/show.html.twig', array(
             'task' => $task,
-            'delete_form' => $deleteForm->createView()
+            'delete_form' => $deleteForm->createView(),
         ));
     }
 
@@ -104,8 +108,9 @@ class TaskController extends Controller
      *
      * @Route("/{id}/edit", name="task_edit")
      * @Method({"GET", "POST"})
+     *
      * @param Request $request
-     * @param Task $task
+     * @param Task    $task
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
@@ -125,7 +130,7 @@ class TaskController extends Controller
         return $this->render('task/edit.html.twig', array(
             'task' => $task,
             'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView()
+            'delete_form' => $deleteForm->createView(),
         ));
     }
 
@@ -134,8 +139,9 @@ class TaskController extends Controller
      *
      * @Route("/{id}", name="task_delete")
      * @Method("DELETE")
+     *
      * @param Request $request
-     * @param Task $task
+     * @param Task    $task
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */

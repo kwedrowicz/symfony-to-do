@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Tag
+ * Tag.
  *
  * @ORM\Table(name="tag")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\TagRepository")
@@ -38,7 +38,6 @@ class Tag
      */
     private $tasks;
 
-
     public function __construct()
     {
         $this->tasks = new ArrayCollection();
@@ -50,7 +49,7 @@ class Tag
     }
 
     /**
-     * Get id
+     * Get id.
      *
      * @return int
      */
@@ -60,7 +59,7 @@ class Tag
     }
 
     /**
-     * Set name
+     * Set name.
      *
      * @param string $name
      *
@@ -74,7 +73,7 @@ class Tag
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -84,7 +83,7 @@ class Tag
     }
 
     /**
-     * Add task
+     * Add task.
      *
      * @param Task $task
      *
@@ -98,7 +97,7 @@ class Tag
     }
 
     /**
-     * Remove task
+     * Remove task.
      *
      * @param Task $task
      */
@@ -108,7 +107,7 @@ class Tag
     }
 
     /**
-     * Get tasks
+     * Get tasks.
      *
      * @return \Doctrine\Common\Collections\Collection
      */

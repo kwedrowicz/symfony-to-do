@@ -9,7 +9,7 @@ use JMS\Serializer\Annotation\Exclude;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 
 /**
- * Category
+ * Category.
  *
  * @ORM\Table(name="category")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\CategoryRepository")
@@ -41,7 +41,7 @@ class Category
     private $tasks;
 
     /**
-     * Get id
+     * Get id.
      *
      * @return int
      */
@@ -51,7 +51,7 @@ class Category
     }
 
     /**
-     * Set name
+     * Set name.
      *
      * @param string $name
      *
@@ -65,7 +65,7 @@ class Category
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -73,8 +73,9 @@ class Category
     {
         return $this->name;
     }
+
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -87,7 +88,7 @@ class Category
     }
 
     /**
-     * Add task
+     * Add task.
      *
      * @param Task $task
      *
@@ -101,7 +102,7 @@ class Category
     }
 
     /**
-     * Remove task
+     * Remove task.
      *
      * @param Task $task
      */
@@ -111,7 +112,7 @@ class Category
     }
 
     /**
-     * Get tasks
+     * Get tasks.
      *
      * @return Collection
      */

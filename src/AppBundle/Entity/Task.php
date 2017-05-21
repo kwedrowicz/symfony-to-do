@@ -13,7 +13,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Hateoas\Configuration\Annotation as Hateoas;
 
 /**
- * Task
+ * Task.
  *
  * @ORM\Table(name="task")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\TaskRepository")
@@ -109,13 +109,12 @@ class Task
     /**
      * @ORM\Column(type="integer", nullable=true)
      *
-     * @var integer
+     * @var int
      */
     private $imageSize;
 
-
     /**
-     * @return integer|null
+     * @return int|null
      */
     public function getImageSize()
     {
@@ -128,7 +127,7 @@ class Task
     }
 
     /**
-     * Get id
+     * Get id.
      *
      * @return int
      */
@@ -138,7 +137,7 @@ class Task
     }
 
     /**
-     * Set subject
+     * Set subject.
      *
      * @param string $subject
      *
@@ -152,7 +151,7 @@ class Task
     }
 
     /**
-     * Get subject
+     * Get subject.
      *
      * @return string
      */
@@ -162,9 +161,9 @@ class Task
     }
 
     /**
-     * Set done
+     * Set done.
      *
-     * @param boolean $done
+     * @param bool $done
      *
      * @return Task
      */
@@ -176,7 +175,7 @@ class Task
     }
 
     /**
-     * Get done
+     * Get done.
      *
      * @return bool
      */
@@ -186,7 +185,7 @@ class Task
     }
 
     /**
-     * Set user
+     * Set user.
      *
      * @param User $user
      *
@@ -200,7 +199,7 @@ class Task
     }
 
     /**
-     * Get user
+     * Get user.
      *
      * @return User
      */
@@ -223,12 +222,12 @@ class Task
         return [
             TaskPriority::NONE => 0,
             TaskPriority::URGENT => 1,
-            TaskPriority::DEADLINE => 2
+            TaskPriority::DEADLINE => 2,
         ];
     }
 
     /**
-     * Set priority
+     * Set priority.
      *
      * @param int $priority
      *
@@ -249,7 +248,7 @@ class Task
     }
 
     /**
-     * Get priority
+     * Get priority.
      *
      * @return string
      */
@@ -259,7 +258,7 @@ class Task
     }
 
     /**
-     * Set category
+     * Set category.
      *
      * @param Category $category
      *
@@ -273,7 +272,7 @@ class Task
     }
 
     /**
-     * Get category
+     * Get category.
      *
      * @return Category
      */
@@ -283,7 +282,7 @@ class Task
     }
 
     /**
-     * Add tag
+     * Add tag.
      *
      * @param Tag $tag
      *
@@ -297,7 +296,7 @@ class Task
     }
 
     /**
-     * Remove tag
+     * Remove tag.
      *
      * @param Tag $tag
      */
@@ -307,7 +306,7 @@ class Task
     }
 
     /**
-     * Get tags
+     * Get tags.
      *
      * @return \Doctrine\Common\Collections\Collection
      */

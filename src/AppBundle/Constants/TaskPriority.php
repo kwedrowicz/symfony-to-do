@@ -1,6 +1,5 @@
 <?php
 
-
 namespace AppBundle\Constants;
 
 abstract class TaskPriority

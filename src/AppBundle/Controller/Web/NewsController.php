@@ -1,6 +1,5 @@
 <?php
 
-
 namespace AppBundle\Controller\Web;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -16,16 +15,19 @@ class NewsController extends Controller
     /**
      * @Route("/")
      * @Method("GET")
+     *
      * @param Request $request
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction(Request $request)
     {
         $news = $this->getDoctrine()->getRepository('AppBundle:News')->findAll();
-        $response =  $this->render('news/index.html.twig', [
-            'news' => $news
+        $response = $this->render('news/index.html.twig', [
+            'news' => $news,
         ]);
         $response->setSharedMaxAge(5);
+
         return $response;
     }
 }

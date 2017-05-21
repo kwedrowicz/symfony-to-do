@@ -8,7 +8,6 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class PasswordEncodeListener
 {
-
     /**
      * @var UserPasswordEncoderInterface
      */

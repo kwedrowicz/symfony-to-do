@@ -29,11 +29,11 @@ class TaskTypeWithoutImage extends AbstractType
         $builder
             ->add('subject')
             ->add('category', EntityType::class, [
-                'class' => 'AppBundle\Entity\Category'
+                'class' => 'AppBundle\Entity\Category',
             ])
             ->add('tags', TextType::class)
             ->add('priority', ChoiceType::class, array(
-                'choices' => Task::getAvailablePriorities()
+                'choices' => Task::getAvailablePriorities(),
             ))
         ;
 
@@ -49,8 +49,8 @@ class TaskTypeWithoutImage extends AbstractType
             'data_class' => 'AppBundle\Entity\Task',
             'csrf_protection' => false,
             'attr' => [
-                'novalidate' => 'novalidate'
-            ]
+                'novalidate' => 'novalidate',
+            ],
         ));
     }
 

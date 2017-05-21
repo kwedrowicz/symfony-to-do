@@ -9,7 +9,6 @@ use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 
 class CategoryController extends FOSRestController implements ClassResourceInterface
 {
-
     /**
      * @ApiDoc(
      *     description="Returns a collection of Categories",
@@ -31,8 +30,9 @@ class CategoryController extends FOSRestController implements ClassResourceInter
     {
         $task = $this->getDoctrine()->getRepository('AppBundle:Category')->find($id);
         if ($task === null) {
-            throw new ResourceNotFoundException("Category not found");
+            throw new ResourceNotFoundException('Category not found');
         }
+
         return $task;
     }
 }

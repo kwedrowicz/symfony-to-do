@@ -11,12 +11,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 
 /**
- * Class TaskController
- * @package AppBundle\Controller\Api
+ * Class TaskController.
  */
 class TaskController extends FOSRestController implements ClassResourceInterface
 {
-
     /**
      * @ApiDoc(
      *     description="Returns a collection of Tasks",
@@ -27,8 +25,9 @@ class TaskController extends FOSRestController implements ClassResourceInterface
     {
         $tasks = $this->getDoctrine()->getRepository('AppBundle:Task')->findAll();
         if ($tasks === null) {
-            throw new ResourceNotFoundException("No task in collection");
+            throw new ResourceNotFoundException('No task in collection');
         }
+
         return $tasks;
     }
 
@@ -74,7 +73,7 @@ class TaskController extends FOSRestController implements ClassResourceInterface
     {
         $task = $this->getDoctrine()->getRepository('AppBundle:Task')->find($id);
         if ($task === null) {
-            throw new ResourceNotFoundException("Task not found");
+            throw new ResourceNotFoundException('Task not found');
         }
 
         $form = $this->createForm('AppBundle\Form\Type\TaskType', $task);
@@ -107,8 +106,9 @@ class TaskController extends FOSRestController implements ClassResourceInterface
     {
         $task = $this->getDoctrine()->getRepository('AppBundle:Task')->find($id);
         if ($task === null) {
-            throw new ResourceNotFoundException("Task not found");
+            throw new ResourceNotFoundException('Task not found');
         }
+
         return $task;
     }
 
@@ -122,7 +122,7 @@ class TaskController extends FOSRestController implements ClassResourceInterface
     {
         $task = $this->getDoctrine()->getRepository('AppBundle:Task')->find($id);
         if ($task === null) {
-            throw new ResourceNotFoundException("Task not found");
+            throw new ResourceNotFoundException('Task not found');
         }
         $em = $this->getDoctrine()->getManager();
         $em->remove($task);

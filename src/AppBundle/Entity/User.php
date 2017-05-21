@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: Krzysztof Wędrowicz krzysztof@wedrowicz.me
  * Date: 14.01.17
- * Time: 23:16
+ * Time: 23:16.
  */
 
 namespace AppBundle\Entity;
@@ -138,9 +138,9 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -148,7 +148,7 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * Set username
+     * Set username.
      *
      * @param string $username
      *
@@ -167,7 +167,7 @@ class User implements UserInterface, \Serializable
         return serialize(array(
             $this->id,
             $this->username,
-            $this->password
+            $this->password,
         ));
     }
 
@@ -182,7 +182,7 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * Set password
+     * Set password.
      *
      * @param string $password
      *
@@ -196,7 +196,7 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * Set email
+     * Set email.
      *
      * @param string $email
      *
@@ -210,7 +210,7 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * Get email
+     * Get email.
      *
      * @return string
      */
@@ -230,7 +230,7 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * Add task
+     * Add task.
      *
      * @param \AppBundle\Entity\Task $task
      *
@@ -244,7 +244,7 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * Remove task
+     * Remove task.
      *
      * @param \AppBundle\Entity\Task $task
      */
@@ -254,7 +254,7 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * Get tasks
+     * Get tasks.
      *
      * @return \Doctrine\Common\Collections\Collection
      */

@@ -3,6 +3,7 @@
 namespace AppBundle\Controller\Web;
 
 use AppBundle\Entity\Task;
+use AppBundle\SearchRepository\TaskRepository;
 use Elastica\Query;
 use Elastica\Query\BoolQuery;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
@@ -31,19 +32,10 @@ class TaskController extends Controller
     {
         if($this->get('kernel')->getEnvironment() != 'test') {
             $search = $request->query->get('search');
-            $finder = $this->get('fos_elastica.finder.app.task');
-            $boolQuery = new BoolQuery();
-            if ($search) {
-                $fieldQuery = new Query\MultiMatch();
-                $fieldQuery->setQuery($search);
-                $fieldQuery->setFields(['subject', 'category', 'tags']);
-                $boolQuery->addMust($fieldQuery);
-            }
-            $userFilter = new Query\Term();
-            $userFilter->setTerm('user', $this->getUser()->getUsername());
-            $boolQuery->addFilter($userFilter);
-
-            $tasks = $finder->find($boolQuery, 1000);
+            /** @var TaskRepository $repository */
+            $repository = $this->get('fos_elastica.manager')->getRepository('AppBundle:Task');
+            /** var array of Acme\UserBundle\Entity\User */
+            $tasks = $repository->findWithUser($this->getUser(), $search);
         } else {
             $tasks = $this->getUser()->getTasks();
         }

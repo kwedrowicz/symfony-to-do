@@ -129,6 +129,7 @@ fos_elastica:
                         model: AppBundle\Entity\Task
                         provider: ~
                         finder: ~
+                        repository: AppBundle\SearchRepository\TaskRepository
 
 vich_uploader:
     db_driver: orm

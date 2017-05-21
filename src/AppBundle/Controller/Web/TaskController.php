@@ -5,6 +5,7 @@ namespace AppBundle\Controller\Web;
 use AppBundle\Entity\Task;
 use Elastica\Query;
 use Elastica\Query\BoolQuery;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -22,6 +23,7 @@ class TaskController extends Controller
      *
      * @Route("/", name="task_index")
      * @Method("GET")
+     * @Cache(expires="+2 days")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */

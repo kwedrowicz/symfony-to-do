@@ -1,6 +1,6 @@
 include Makefile-variables
 
-all: docker-build docker-up
+all: docker-build docker-up-no-deamon
 
 docker-build:
 	docker-compose ${COMPOSE_FILE_OPTION} build

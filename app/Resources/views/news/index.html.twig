@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>News list</h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Subject</th>
+            <th>Content</th>
+            <th>CreatedAt</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for el in news %}
+            <tr>
+                <td>{{ el.id }}</a></td>
+                <td>{{ el.subject }}</td>
+                <td>{{ el.content }}</td>
+                <td>{{ el.createdAt|date }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

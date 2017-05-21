@@ -20,6 +20,7 @@ services:
         container_name: symfonytodo_app
         ports:
             - "8080:80"
+            - "6081:6081"
         depends_on:
             - db
             - elasticsearch

@@ -18,6 +18,4 @@
 /.env
 /.docker-sync/
 /node_modules/
-.idea
-.DS_Store
 .php_cs.cache

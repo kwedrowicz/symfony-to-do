@@ -1,0 +1,18 @@
+fos_elastica:
+    clients:
+        default: { host: "%elasticsearch_host%", port: 9200 }
+    indexes:
+        app:
+            types:
+                task:
+                    properties:
+                        subject: ~
+                        user: ~
+                        category: ~
+                        tags: ~
+                    persistence:
+                        driver: orm
+                        model: AppBundle\Entity\Task
+                        provider: ~
+                        finder: ~
+                        repository: AppBundle\SearchRepository\TaskRepository

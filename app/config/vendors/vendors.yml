@@ -1,0 +1,9 @@
+imports:
+    - { resource: lexik_jwt_authentication.yml }
+    - { resource: vich_uploader.yml }
+    - { resource: fos_elastica.yml }
+    - { resource: fos_rest.yml }
+    - { resource: nelmio_cors.yml }
+    - { resource: nelmio_api_doc.yml }
+    - { resource: stof_doctrine_extensions.yml }
+    - { resource: doctrine_migrations.yml }

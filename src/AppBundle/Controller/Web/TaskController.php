@@ -3,8 +3,6 @@
 namespace AppBundle\Controller\Web;
 
 use AppBundle\Entity\Task;
-use AppBundle\SearchRepository\TaskRepository;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -22,7 +20,6 @@ class TaskController extends Controller
      *
      * @Route("/", name="task_index")
      * @Method("GET")
-     * @Cache(expires="+2 days")
      *
      * @param Request $request
      *
@@ -30,20 +27,8 @@ class TaskController extends Controller
      */
     public function indexAction(Request $request)
     {
-        if ($this->get('kernel')->getEnvironment() != 'test') {
-            $search = $request->query->get('search');
-            /** @var TaskRepository $repository */
-            $repository = $this->get('fos_elastica.manager')->getRepository('AppBundle:Task');
-            /** var array of Acme\UserBundle\Entity\User */
-            $tasks = $repository->findWithUser($this->getUser(), $search);
-        } else {
-            $tasks = $this->getUser()->getTasks();
-        }
-        $deleteForms = [];
-        /* @var Task $task */
-        foreach ($tasks as $task) {
-            $deleteForms[$task->getId()] = $this->createDeleteForm($task)->createView();
-        }
+        $tasks = $this->get('app.task.finder')->findByElastic($this->getUser(), $request);
+        $deleteForms = $this->get('app.task.form_generator')->generateDeleteFormViews($tasks);
 
         return $this->render('task/index.html.twig', array(
             'tasks' => $tasks,
@@ -95,7 +80,7 @@ class TaskController extends Controller
      */
     public function showAction(Task $task)
     {
-        $deleteForm = $this->createDeleteForm($task);
+        $deleteForm = $this->createForm('AppBundle\Form\Type\TaskTypeDelete',$task);
 
         return $this->render('task/show.html.twig', array(
             'task' => $task,
@@ -116,7 +101,7 @@ class TaskController extends Controller
      */
     public function editAction(Request $request, Task $task)
     {
-        $deleteForm = $this->createDeleteForm($task);
+        $deleteForm = $this->createForm('AppBundle\Form\Type\TaskTypeDelete',$task);
         $editForm = $this->createForm('AppBundle\Form\Type\TaskType', $task);
         $editForm->add('done');
         $editForm->handleRequest($request);
@@ -147,7 +132,7 @@ class TaskController extends Controller
      */
     public function deleteAction(Request $request, Task $task)
     {
-        $form = $this->createDeleteForm($task);
+        $form = $this->createForm('AppBundle\Form\Type\TaskTypeDelete', $task);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -157,20 +142,5 @@ class TaskController extends Controller
         }
 
         return $this->redirectToRoute('task_index');
-    }
-
-    /**
-     * Creates a form to delete a task entity.
-     *
-     * @param Task $task The task entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm(Task $task)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('task_delete', array('id' => $task->getId())))
-            ->setMethod('DELETE')
-            ->getForm();
     }
 }

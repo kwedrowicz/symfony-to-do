@@ -18,15 +18,11 @@ class NewsController extends Controller
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction(Request $request){
-        sleep(3);
         $news = $this->getDoctrine()->getRepository('AppBundle:News')->findAll();
         $response =  $this->render('news/index.html.twig', [
             'news' => $news
         ]);
         $response->setSharedMaxAge(5);
-        //$response->setEtag(sha1($response->getContent()));
-        //$response->setPublic();
-        //$response->isNotModified($request);
         return $response;
     }
 }

@@ -48,6 +48,13 @@ services:
             symfony_app:
                 aliases:
                     - elasticsearch
+    redis:
+        image: redis:3.0
+        container_name: symfonytodo_redis
+        networks:
+            symfony_app:
+                aliases:
+                    - redis
 
 volumes:
     esdata:

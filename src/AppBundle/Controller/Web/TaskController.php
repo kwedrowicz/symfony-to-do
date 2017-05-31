@@ -27,9 +27,6 @@ class TaskController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $redis = $this->get('snc_redis.default');
-        $redis->get('bar');
-
         $tasks = $this->get('app.task.finder')->findByElastic($this->getUser(), $request);
         $deleteForms = $this->get('app.task.form_generator')->generateDeleteFormViews($tasks);
 

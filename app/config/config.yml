@@ -82,3 +82,16 @@ snc_redis:
             type: predis
             alias: default
             dsn: redis://redis
+        cache:
+            type: predis
+            alias: cache
+            dsn: redis://redis/1
+            logging: true
+    doctrine:
+        metadata_cache:
+            client: cache
+            entity_manager: default
+            document_manager: default
+        query_cache:
+            client: cache
+            entity_manager: default

@@ -5,6 +5,7 @@ php:
 
 services:
   - elasticsearch
+  - redis
 
 install:
   - composer install

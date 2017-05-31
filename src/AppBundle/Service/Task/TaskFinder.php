@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace AppBundle\Service\Task;
@@ -16,6 +17,7 @@ class TaskFinder
 
     /**
      * TaskFinder constructor.
+     *
      * @param $kernel
      * @param $repositoryManager
      */
@@ -25,8 +27,7 @@ class TaskFinder
         $this->repositoryManager = $repositoryManager;
     }
 
-
-    public function findByElastic(User $user, Request $request):array
+    public function findByElastic(User $user, Request $request): array
     {
         $search = $request->query->get('search');
         if ($this->kernel->getEnvironment() != 'test') {
@@ -37,6 +38,7 @@ class TaskFinder
         } else {
             $tasks = $user->getTasks();
         }
+
         return $tasks;
     }
 }

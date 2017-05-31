@@ -13,6 +13,7 @@ class TaskTypeDelete extends AbstractType
 
     /**
      * TaskTypeDelete constructor.
+     *
      * @param $router
      */
     public function __construct(Router $router)
@@ -37,7 +38,7 @@ class TaskTypeDelete extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Task'
+            'data_class' => 'AppBundle\Entity\Task',
         ));
     }
 

@@ -80,7 +80,7 @@ class TaskController extends Controller
      */
     public function showAction(Task $task)
     {
-        $deleteForm = $this->createForm('AppBundle\Form\Type\TaskTypeDelete',$task);
+        $deleteForm = $this->createForm('AppBundle\Form\Type\TaskTypeDelete', $task);
 
         return $this->render('task/show.html.twig', array(
             'task' => $task,
@@ -101,7 +101,7 @@ class TaskController extends Controller
      */
     public function editAction(Request $request, Task $task)
     {
-        $deleteForm = $this->createForm('AppBundle\Form\Type\TaskTypeDelete',$task);
+        $deleteForm = $this->createForm('AppBundle\Form\Type\TaskTypeDelete', $task);
         $editForm = $this->createForm('AppBundle\Form\Type\TaskType', $task);
         $editForm->add('done');
         $editForm->handleRequest($request);

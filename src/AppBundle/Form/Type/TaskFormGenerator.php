@@ -11,13 +11,13 @@ class TaskFormGenerator
 
     /**
      * TaskFormGenerator constructor.
+     *
      * @param $factory
      */
     public function __construct(FormFactory $factory)
     {
         $this->factory = $factory;
     }
-
 
     public function generateDeleteFormViews($tasks)
     {
@@ -26,6 +26,7 @@ class TaskFormGenerator
         foreach ($tasks as $task) {
             $deleteForms[$task->getId()] = $this->factory->create('AppBundle\Form\Type\TaskTypeDelete', $task)->createView();
         }
+
         return $deleteForms;
     }
 }

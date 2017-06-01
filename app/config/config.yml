@@ -86,11 +86,3 @@ snc_redis:
             alias: cache
             dsn: "redis://%redis_host%/1"
             logging: true
-    doctrine:
-        metadata_cache:
-            client: cache
-            entity_manager: default
-            document_manager: default
-        query_cache:
-            client: cache
-            entity_manager: default

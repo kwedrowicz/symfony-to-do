@@ -19,3 +19,13 @@ monolog:
             level: debug
         console:
             type:  console
+
+snc_redis:
+    doctrine:
+        metadata_cache:
+            client: cache
+            entity_manager: default
+            document_manager: default
+        query_cache:
+            client: cache
+            entity_manager: default

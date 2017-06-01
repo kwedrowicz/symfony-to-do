@@ -7,7 +7,7 @@ $loader = require __DIR__.'/../app/autoload.php';
 include_once __DIR__.'/../var/bootstrap.php.cache';
 
 $kernel = new AppKernel('prod', false);
-Request::setTrustedProxies(['127.0.0.1']);
+Request::setTrustedProxies(['127.0.0.1'], Request::HEADER_X_FORWARDED_ALL);
 $kernel->loadClassCache();
 $request = Request::createFromGlobals();
 $response = $kernel->handle($request);

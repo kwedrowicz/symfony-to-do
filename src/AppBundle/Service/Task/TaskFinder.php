@@ -36,7 +36,7 @@ class TaskFinder
             /** var array of Acme\UserBundle\Entity\User */
             $tasks = $repository->findWithUser($user, $search);
         } else {
-            $tasks = $user->getTasks();
+            $tasks = $user->getTasks()->toArray();
         }
 
         return $tasks;

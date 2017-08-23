@@ -12,9 +12,3 @@ exclude_patterns:
     - web/config.php
     - web/app_*.php
     - phpunit-6.1.phar
-
-pre_composer_script: |
-    yes '' | pecl install redis
-
-php_ini: |
-    extension=redis.so

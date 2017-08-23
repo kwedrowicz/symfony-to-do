@@ -21,10 +21,10 @@ docker-rm:
 	docker-compose ${COMPOSE_FILE_OPTION} rm
 
 exec:
-		@docker exec -i -t symfonytodo_app /bin/bash
+	docker exec -i -t symfonytodo_app /bin/bash
 
 ifconfig:
-		sudo ifconfig lo0 alias 10.254.254.254
+	sudo ifconfig lo0 alias 10.254.254.254
 
 cs-fixer:
-		@docker exec -i -t symfonytodo_app /bin/bash -c "php php-cs-fixer.phar fix src --rules=@PSR1,@PSR2,@Symfony --verbose --show-progress=estimating"
+	@docker exec -i -t symfonytodo_app /bin/bash -c "php php-cs-fixer.phar fix src --rules=@PSR1,@PSR2,@Symfony --verbose --show-progress=estimating"
